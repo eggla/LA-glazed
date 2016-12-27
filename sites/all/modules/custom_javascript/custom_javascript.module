@@ -1,0 +1,13 @@
+<?php
+
+function custom_javascript_init() {
+    drupal_add_js(drupal_get_path('module', 'custom_javascript') . '/scrollEvents.js');
+    drupal_add_js(drupal_get_path('module', 'custom_javascript') . '/fixed-bottom-nav.js');
+     // Check for front page
+    if(drupal_is_front_page()){        
+        // Add css/js files
+       drupal_add_js(drupal_get_path('module', 'custom_javascript') . '/full-viewport.js');
+    }
+}
+	
+	

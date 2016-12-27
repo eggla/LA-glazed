@@ -1,0 +1,71 @@
+name = cms
+distribution_name = cms
+description = Drupal distribution with production ready CMS features
+core = 7.x
+exclusive = 1
+
+; Core
+; ----
+dependencies[] = block
+dependencies[] = comment
+dependencies[] = contextual
+dependencies[] = color
+dependencies[] = dashboard
+dependencies[] = dblog
+dependencies[] = field
+dependencies[] = field_sql_storage
+dependencies[] = field_ui
+dependencies[] = file
+dependencies[] = filter
+dependencies[] = help
+dependencies[] = image
+dependencies[] = list
+dependencies[] = menu
+dependencies[] = node
+dependencies[] = number
+dependencies[] = options
+dependencies[] = path
+dependencies[] = rdf
+dependencies[] = search
+dependencies[] = shortcut
+dependencies[] = system
+dependencies[] = taxonomy
+dependencies[] = text
+dependencies[] = toolbar
+dependencies[] = update
+dependencies[] = user
+
+; CMS Installation Profile
+; ----
+dependencies[] = module_filter
+
+variables[theme_default] = glazed_free
+variables[admin_theme] = seven
+variables[node_admin_theme] = 0
+theme = glazed_free
+
+; Performance Stuff on!
+variables[block_cache] = 1
+variables[cache] = 1
+variables[page_cache_maximum_age] = 86400
+variables[page_compression] = 1
+variables[preprocess_css] = 1
+variables[preprocess_js] = 1
+
+; Other Configuration
+variables[entity_rebuild_on_flush] = 0
+variables[features_rebuild_on_flush] = 0
+variables[fences_default_classes] = 1
+variables[fences_default_markup] = 1
+variables[html5_tools_override_views_field_rewrite_elements] = 1
+variables[image_jpeg_quality] = 100
+variables[jquery_update_jquery_cdn] = microsoft
+variables[jquery_update_jquery_version] = 2.1
+variables[update_check_disabled] = 0
+variables[update_check_frequency] = 1
+variables[update_notification_threshold] = security
+variables[user_picture_default] = profiles/cms/def-profile-pic.png
+variables[user_picture_dimensions] = 1024x1024
+variables[user_picture_style] = thumbnail
+variables[user_pictures] = 1
+variables[user_register] = USER_REGISTER_ADMINISTRATORS_ONLY

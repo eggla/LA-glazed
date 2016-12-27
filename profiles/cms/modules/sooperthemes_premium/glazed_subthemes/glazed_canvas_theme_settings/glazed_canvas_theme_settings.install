@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_install()
+ */
+function glazed_canvas_theme_settings_install() {
+  drupal_flush_all_caches();
+
+ // Enable some standard blocks. cms_theme variable is more reliable during install-time.
+  if (variable_get('cms_theme')) {
+    $cms_theme = variable_get('cms_theme');
+  }
+  else {
+    $cms_theme = variable_get('theme_default', 'bartik');
+  }
+  $themesettings = variable_get('themesettings');
+  $blocks = array(
+    array(
+      'module' => 'bean',
+      'delta' => 'contact-block',
+      'theme' => $cms_theme,
+      'status' => '1',
+      'visibility' => '1',
+      'weight' => '-1',
+      'region' => 'content',
+      'pages' => 'contact',
+      'title' => '<none>',
+      'cache' => '-1',
+      'css_class' => '',
+    ),
+    array(
+      'cache' => '-1',
+      'css_class' => '',
+      'delta' => 'sooperthemes-copyright-drupal-tm',
+      'module' => 'bean',
+      'pages' => '',
+      'region' => 'footer',
+      'status' => '1',
+      'theme' => $cms_theme,
+      'title' => '<none>',
+      'visibility' => '0',
+      'weight' => '2',
+    ),
+  );
+  foreach ($blocks as $block) {
+    db_merge('block')
+      ->key(array(
+        'module' => $block['module'],
+        'delta' => $block['delta'],
+        'theme' => $cms_theme,
+      ))
+      ->fields($block)
+      ->execute();
+  }
+
+}
+
+/**
+ * Implements hook_enable()
+ */
+function glazed_canvas_theme_settings_enable() {
+  drupal_flush_all_caches();
+
+  if (variable_get('cms_theme')) {
+    $cms_theme = variable_get('cms_theme');
+  }
+  else {
+    $cms_theme = variable_get('theme_default', 'bartik');
+  }
+  if ($cms_theme == 'glazed' OR $cms_theme == 'glazed_free') {
+    require_once(drupal_get_path('theme', $cms_theme) . '/glazed_callbacks.inc');
+    _color_module_css_write($cms_theme);
+    glazed_css_cache_build($cms_theme);
+  }
+
+  // Set default_demo_light homepage
+  module_load_include('inc', 'pathauto');
+  // module_load_include('inc', 'pathauto.pathauto');
+  $nids = db_query("SELECT nid FROM {node}")->fetchCol();
+  pathauto_node_update_alias_multiple($nids, 'bulkupdate');
+  module_load_include('module', 'uuid');
+  $nid = entity_get_id_by_uuid('node', array('f38180f4-4b7a-4999-9e34-ad3db23f430e'));
+  $system_path = 'node/' . array_pop($nid);
+  if (!variable_get('site_frontpage')) {
+    variable_set('site_frontpage', $system_path);
+  }
+
+  drupal_flush_all_caches();
+}

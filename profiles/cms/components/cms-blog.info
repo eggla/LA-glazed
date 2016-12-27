@@ -1,0 +1,8 @@
+
+; CMS Blog
+; -------
+
+dependencies[] = cms_blog
+dependencies[] = media
+dependencies[] = media_internet
+dependencies[] = tagclouds

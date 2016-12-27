@@ -1,0 +1,4 @@
+name = Xola Buttons
+description = Adds the Javascript for the Xola button functionality
+package = Xola
+core = 7.x

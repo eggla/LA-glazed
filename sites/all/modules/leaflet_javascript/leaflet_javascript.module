@@ -1,0 +1,29 @@
+<?php
+	/**
+	 * Implements hook_leaflet_map_info().
+	 */
+//	function hook_leaflet_map_info_alter(&$maps) {
+//	  // See https://github.com/Leaflet/Leaflet.markercluster for all options
+//	  $maps['OSM Mapnik']['settings'] += array(
+//	    'spiderfyDistanceMultiplier' => 10,
+//	  );
+//	}
+
+	function leaflet_javascript_leaflet_map_info_alter(&$map_info) {
+	   foreach ($map_info as $map_id => $info) {
+	     $map_info[$map_id]['settings']['dragging'] = FALSE;
+	   }
+	 }
+	function leaflet_javascript_views_pre_view(&$view, &$display_id, &$args) {
+		if($view->name == 'Maps') {
+			drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/leaflet_custom_controls.js');
+			drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/leaflet_hide_shapes.js');
+			drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/leaflet_trigger_action.js');
+			drupal_add_js(drupal_get_path('module', 'carbide_builder') . '/carbide_builder/vendor/jquery.waypoints/lib/jquery.waypoints.min.js');
+			drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/pancontrol/L.Control.Pan.js');
+			drupal_add_css(drupal_get_path('module', 'leaflet_javascript') . '/pancontrol/L.Control.Pan.css');
+			drupal_add_css(drupal_get_path('module', 'leaflet_javascript') . '/pancontrol/L.Control.Pan.ie.css');
+		}
+	}
+	
+	

@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Map Content Types feature.
+ */
+
+include_once 'map_content_types.features.inc';

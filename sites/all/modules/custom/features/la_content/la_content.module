@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the LA Content feature.
+ */
+
+include_once 'la_content.features.inc';

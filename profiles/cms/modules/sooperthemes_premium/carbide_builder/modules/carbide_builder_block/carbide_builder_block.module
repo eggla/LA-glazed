@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+
+include_once 'carbide_builder_block.features.inc';

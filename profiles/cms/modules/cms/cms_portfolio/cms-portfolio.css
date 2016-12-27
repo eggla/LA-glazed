@@ -1,0 +1,21 @@
+
+.cms-portfolio-extra span.field-label {
+  float: left;
+  width: 35%;
+  clear: both;
+}
+.cms-portfolio-extra .inline {
+  float: right;
+  width: 64%;
+}
+
+.field-comparison-images,
+.field-portfolio-images img,
+.field-portfolio-images .image-field-caption {
+  margin-bottom: 30px;
+}
+
+.cms-portfolio-images .row img,
+.cms-portfolio-images .row .image-field-caption {
+  margin-bottom: 0;
+}

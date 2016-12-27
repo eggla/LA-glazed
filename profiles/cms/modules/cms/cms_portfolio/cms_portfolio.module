@@ -1,0 +1,235 @@
+<?php
+/**
+ * @file
+ * Code for the CMS Portfolio feature.
+ */
+
+include_once 'cms_portfolio.features.inc';
+
+/**
+ * Implementation of hook_field_group_pre_render().
+ */
+function cms_portfolio_field_group_pre_render(&$element, $group, &$form) {
+  if ($group->group_name == 'group_cms_portfolio_top'
+    OR $group->group_name == 'group_cms_portfolio_fields'
+    OR $group->group_name == 'group_portfolio_images') {
+    // Get Project Layout And Sidebar Width
+    // @see cms-portfolio.js
+    $layout = FALSE;
+    if (!empty($form['#node']->field_project_details_layout)) {
+      $layout = $form['#node']->field_project_details_layout['und'][0]['value'];
+    }
+    elseif (theme_get_setting('portfolio_details')) {
+      $layout = theme_get_setting('portfolio_details');
+    }
+    if (!empty($form['#node']->field_project_sidebar)) {
+      $sidebar = $form['#node']->field_project_sidebar['und'][0]['value'];
+    }
+    elseif (theme_get_setting('portfolio_sidebar')) {
+      $sidebar = theme_get_setting('portfolio_sidebar');
+    }
+
+    if ($group->group_name == 'group_cms_portfolio_top') {
+      // Adjust group weight to change source order of HTML content
+      if ($layout == 'right' OR $layout == 'bottom') {
+        $group->weight = 99;
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_node()
+ */
+function cms_portfolio_preprocess_node(&$vars) {
+  if ($vars['type'] == 'portfolio') {
+    $layout = 'top';
+    if (!empty($vars['field_project_details_layout'])) {
+      $layout = $vars['field_project_details_layout']['und'][0]['value'];
+    }
+    elseif (theme_get_setting('portfolio_details')) {
+      $layout = theme_get_setting('portfolio_details');
+    }
+    $vars['classes_array'][] = 'node-details-' . $layout;
+    $sidebar = '4';
+    if (!empty($vars['field_project_sidebar'])) {
+      $sidebar = $vars['field_project_sidebar']['und'][0]['value'];
+    }
+    elseif (theme_get_setting('portfolio_sidebar')) {
+      $sidebar = theme_get_setting('portfolio_sidebar');
+    }
+    $vars['attributes_array']['data-sidebar'] = $sidebar;
+    $vars['attributes_array']['data-main'] = 12 - $sidebar;
+    $style = 'sidecaption';
+    if (!empty($vars['field_image_display_style'])) {
+      $style = $vars['field_image_display_style']['und'][0]['value'];
+    }
+    elseif (theme_get_setting('portfolio_images')) {
+      $style = theme_get_setting('portfolio_images');
+    }
+    $vars['classes_array'][] = 'node-images-' . $style;
+  }
+}
+
+
+//
+// The following code is adapted from zurb_twentytwenty module and patch drupal.org/node/2503299
+// Module is not maintained anymore so adapted and included in cms_portfolio
+//
+/**
+ * Implementation of hook_theme().
+ */
+function cms_portfolio_theme() {
+  return array(
+    'image_compare' => array(
+      'variables' => array(
+        'items'   => NULL,
+        'images'  => NULL,
+        'options' => NULL,
+        'entity'  => NULL,
+      ),
+      'template'  => 'image-compare',
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_field_formatter_info().
+ * @return array
+ */
+function cms_portfolio_field_formatter_info() {
+  $formatters = array(
+    'twentytwenty' => array(
+      'label'       => t('Before/After Image Compare'),
+      'field types' => array('image'),
+      'settings'    => array(
+        'image_style' => '',
+        'default_offset_pct' => '0.5',
+      ),
+    ),
+  );
+
+  return $formatters;
+}
+
+/**
+ * Implementation of hook_field_formatter_settings_form().
+ * @param $field
+ * @param $instance
+ * @param $view_mode
+ * @param $form
+ * @param $form_state
+ * @return array
+ */
+function cms_portfolio_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $element = array(
+    '#type' => 'fieldset',
+    '#title' => t('Image Compare Settings'),
+  );
+
+  $element['image_style'] = array(
+    '#title' => t('Image style'),
+    '#type' => 'select',
+    '#default_value' => $settings['image_style'],
+    '#empty_option' => t('None (original image)'),
+    '#options' => image_style_options(FALSE),
+  );
+
+  $element['default_offset_pct'] = array(
+    '#title' => t('Default Slider Position'),
+    '#description' => t('Select an offset between 0 and 1 to set how far the slider is from the lefthand side when it loads. The default is 0.5.'),
+    '#type' => 'textfield',
+    '#default_value' => $settings['default_offset_pct'],
+  );
+
+  return $element;
+}
+
+/**
+ * Implementation of hook_field_formatter_settings_summary().
+ * @param $field
+ * @param $instance
+ * @param $view_mode
+ * @return string
+ */
+function cms_portfolio_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $image_styles = image_style_options(FALSE);
+  unset($image_styles['']);
+
+  $summary = array();
+
+  // Styles could be lost because of enabled/disabled modules that defines
+  // their styles in code.
+  if (isset($image_styles[$settings['image_style']])) {
+    $summary[] = t('Image style: @value', array('@value' => $settings['image_style']));
+  } else {
+    $summary[] = t('Original image');
+  }
+
+  if (isset($settings['default_offset_pct'])) {
+    $summary[] = t('Default offset: @value', array('@value' => $settings['default_offset_pct']));
+  }
+
+  if ($field['cardinality'] != 2) {
+    $summary[] = t('<strong>This image field needs to accept two images to be able to run TwentyTwenty properly, it is currently set to @value.</strong>', array('@value' => ($field['cardinality'] > 0) ? $field['cardinality'] : 'unlimited'));
+  }
+
+  return implode('<br />', $summary);
+}
+
+/**
+ * Implementation of hook_field_formatter_view().
+ * @param $entity_type
+ * @param $entity
+ * @param $field
+ * @param $instance
+ * @param $langcode
+ * @param $items
+ * @param $display
+ * @return array
+ */
+function cms_portfolio_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $settings = $display['settings'];
+  $images = array();
+  $element = array();
+
+  $path = drupal_get_path('module', 'cms_portfolio');
+  drupal_add_css($path . '/vendor/zurb_twentytwenty/twentytwenty.css', array('scope' => 'footer', 'weight' => 110));
+  drupal_add_js($path . '/vendor/zurb_twentytwenty/jquery.event.move.js', array('scope' => 'footer', 'weight' => 100));
+  drupal_add_js($path . '/vendor/zurb_twentytwenty/jquery.twentytwenty.js', array('scope' => 'footer', 'weight' => 110));
+  drupal_add_js(array('zurbTwentytwenty' => $settings), 'setting');
+
+  if (count($items)) {
+    foreach ($items as $item) {
+      $item['path'] = $item['uri'];
+
+      if (isset($settings['image_style']) && drupal_strlen($settings['image_style'])) {
+        $item['style_name'] = $settings['image_style'];
+        $images[] = theme('image_style', $item);
+      }
+      else {
+        $images[] = theme('image', $item);
+      }
+    }
+
+    $element[] = array(
+      '#theme' => 'image_compare',
+      '#items' => $items,
+      '#images' => $images,
+      '#options' => array(
+        'image_style' => $settings['image_style'],
+        'default_offset_pct' => $settings['default_offset_pct'],
+      ),
+      '#entity' => $entity,
+    );
+  }
+
+  return $element;
+}
+
+// End of zurb twentytwenty image compare code

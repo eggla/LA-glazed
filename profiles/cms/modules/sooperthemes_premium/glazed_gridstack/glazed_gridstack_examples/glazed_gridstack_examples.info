@@ -1,0 +1,9 @@
+name = Glazed GridStack Example Views
+description = Glazed GridStack Example Views using "Glazed Drupal CMS Blog" Content Type
+package = Glazed Premium Theme
+core = 7.x
+version = 7.x-1.0
+
+dependencies[] = views
+dependencies[] = glazed_gridstack
+dependencies[] = cms_blog

@@ -1,0 +1,222 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the test module.
+ */
+
+/**
+ * Implements hook_enable().
+ */
+function carbide_builder_enable() {
+
+  if (drupal_get_path('theme', 'bootstrap')) {
+    variable_set('carbide_bootstrap', FALSE);
+  }
+
+  db_update('system')
+    ->fields(array('weight' => 100))
+    ->condition('type', 'module')
+    ->condition('name', 'carbide_builder')
+    ->execute();
+
+  $format = array(
+    'format' => 'carbide_builder',
+    'name' => 'Carbide builder',
+    'cache' => 0,
+    'status' => 1,
+    'weight' => 0,
+    'filters' => array(
+      'carbide_builder' => array(
+        'status' => 1,
+        'weight' => 0,
+        'module' => 'carbide_builder',
+        'settings' => array(),
+      ),
+    ),
+  );
+  $format = (object) $format;
+  filter_format_save($format);
+
+}
+
+/**
+ * Implements hook_disable().
+ */
+function carbide_builder_disable() {
+  $format = array(
+    'format' => 'carbide_builder',
+    'name' => 'Carbide builder',
+    'cache' => 0,
+    'status' => 1,
+    'weight' => 0,
+  );
+  $format = (object) $format;
+  filter_format_disable($format);
+}
+
+/**
+ * Implements hook_install().
+ */
+function carbide_builder_install() {
+  variable_set('image_allow_insecure_derivatives', TRUE);
+  // Install page templates
+  module_load_include('inc', 'carbide_builder', 'inc/carbide_builder.templates');
+  carbide_set_page_templates();
+}
+
+/**
+ * Implements hook_schema().
+ */
+function carbide_builder_schema() {
+  $schema['carbide_form_submissions'] = array(
+    'description' => 'Carbide form submissions',
+    'fields' => array(
+      'entity_type' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'bundle' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'field_name' => array(
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'submission' => array(
+        'type' => 'text',
+      ),
+    ),
+    'primary key' => array(
+      'entity_type',
+      'bundle',
+      'entity_id',
+      'field_name',
+      'name',
+      'created',
+    ),
+  );
+  $schema['carbide_user_templates'] = array(
+    'description' => 'Carbide user saved templates',
+    'fields' => array(
+      'uid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+      ),
+      'template' => array(
+        'type' => 'text',
+      ),
+    ),
+    'primary key' => array('uid', 'name'),
+  );
+  $schema['carbide_page_templates'] = array(
+    'description' => 'Carbide page templates',
+    'fields' => array(
+      'uuid' => array(
+        'type' => 'char',
+        'length' => 36,
+        'not null' => TRUE,
+      ),
+      'title' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'module' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'category' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'image' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'template' => array(
+        'type' => 'text',
+        'size' => 'big',
+      ),
+      'weight' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('uuid', 'title', 'weight'),
+  );
+  return $schema;
+}
+
+/**
+ * Create table carbide_page_templates
+ */
+function carbide_builder_update_7002() {
+  // Check if old azexo_composer scripts directory exists and remove if found
+  if (file_exists('public://azexo_composer')) {
+    drupal_rmdir('public://azexo_composer');
+  }
+
+  // Install page templates
+  $table_name = 'carbide_page_templates';
+  $schema = drupal_get_schema_unprocessed('carbide_builder');
+  if (!empty($schema[$table_name])) {
+    db_create_table($table_name, $schema[$table_name]);
+  }
+  module_load_include('inc', 'carbide_builder', 'inc/carbide_builder.templates');
+  carbide_set_page_templates();
+}
+
+/**
+ * Update carbide builder page templates
+ */
+function carbide_builder_update_7003() {
+  // Update page templates
+  $schema = drupal_get_schema_unprocessed('carbide_builder');
+  module_load_include('inc', 'carbide_builder', 'inc/carbide_builder.templates');
+  carbide_set_page_templates();
+}
+
+/**
+ * Update carbide builder page templates
+ */
+function carbide_builder_update_7004() {
+  // Fix about me template
+  $schema = drupal_get_schema_unprocessed('carbide_builder');
+  module_load_include('inc', 'carbide_builder', 'inc/carbide_builder.templates');
+  carbide_set_page_templates();
+}

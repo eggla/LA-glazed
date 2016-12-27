@@ -1,0 +1,39 @@
+
+  function FormDataElement(parent, position) {
+    FormDataElement.baseclass.apply(this, arguments);
+  }
+  extend(FormDataElement, AnimatedElement);
+  mixin(FormDataElement.prototype, {
+    form_elements: {},
+    show_parent_controls: '.az-form',
+    params: [
+      make_param_type({
+        type: 'textfield',
+        heading: Drupal.t('Name'),
+        param_name: 'name',
+        description: Drupal.t('Required.'),
+        required: true,
+      }),
+      make_param_type({
+        type: 'checkbox',
+        heading: Drupal.t('Field is required?'),
+        param_name: 'required',
+        value: {
+          'yes': Drupal.t("Yes"),
+        },
+      }),
+      make_param_type({
+        type: 'textfield',
+        heading: Drupal.t('Title'),
+        param_name: 'title',
+      }),
+    ].concat(FormDataElement.prototype.params),
+  });
+
+  function register_form_data_element(base, Element) {
+    extend(Element, FormDataElement);
+    Element.prototype.base = base;
+    FormDataElement.prototype.elements[base] = Element;
+    FormDataElement.prototype.tags[base] = Element;
+    FormDataElement.prototype.form_elements[base] = Element;
+  }

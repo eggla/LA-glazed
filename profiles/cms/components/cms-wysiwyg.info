@@ -1,0 +1,6 @@
+
+; CMS WYSIWYG
+; -------
+
+dependencies[] = cms_wysiwyg
+dependencies[] = wysiwyg

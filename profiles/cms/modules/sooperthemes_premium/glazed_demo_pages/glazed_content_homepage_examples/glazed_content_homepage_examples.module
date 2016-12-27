@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Glazde Content: Homepage Examples feature.
+ */
+
+include_once 'glazed_content_homepage_examples.features.inc';
