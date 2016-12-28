@@ -1,0 +1,197 @@
+<?php
+
+/**
+ * @file
+ * Code for the Glazed GridStack feature.
+
+/**
+ * Implements hook_update_status_alter().
+ */
+function glazed_gridstack_update_status_alter(&$projects) {
+  if (isset($projects['glazed_gridstack']) && isset($projects['glazed_gridstack']['title'])) {
+    $projects['glazed_gridstack']['title'] .=  ' ' . t('on sooperthemes.com. Click for more info.');
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function glazed_gridstack_views_api() {
+  return array("api" => "3.0");
+}
+/**
+ * Implements hook_help().
+ *
+ */
+function glazed_gridstack_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#glazed_gridstack':
+      // Help text for the admin section, using the module name in the path.
+      return t("Read our !link on SooperThemes.com", array('!link' => l(t('Glazed GridStack Views Tutorial'), "https://www.sooperthemes.com/documentation/creating-new-gridstack-view")));
+  }
+}
+
+/**
+ * Implements hook_library().
+ */
+function glazed_gridstack_library() {
+  $module_path = drupal_get_path('module', 'glazed_gridstack');
+  $libraries['glazed_gridstack_lib'] = array(
+    'title' => 'Library for Glazed GridStack views style plugin',
+    'version' => '1.0',
+    'js' => array(
+      // $module_path . '/vendor/lodash/lodash.min.js' => array('group' => JS_LIBRARY),
+      $module_path . '/vendor/underscore/underscore-min.js' => array('group' => JS_LIBRARY),
+      $module_path . '/vendor/gridstack/dist/gridstack.min.js' => array('group' => JS_LIBRARY),
+      $module_path . '/js/glazed_gridstack.js' => array('group' => JS_LIBRARY),
+    ),
+    'css' => array(
+      $module_path . '/vendor/gridstack/dist/gridstack.min.css' => array("group" => CSS_DEFAULT),
+      $module_path . '/styles/css/glazed_gridstack.css' => array("group" => CSS_DEFAULT),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function glazed_gridstack_field_formatter_info() {
+  return array(
+    'glazed_gridstack_formatter' => array(
+      'label' => t('Glazed GridStack image formatter'),
+      'field types' => array('image'),
+      'settings' => array(
+        'image_style' => '',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function glazed_gridstack_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $image_styles = image_style_options();
+  $element['image_style'] = array(
+    '#title' => t('Image style'),
+    '#type' => 'select',
+    '#options' => $image_styles,
+    '#default_value' => $settings['image_style'],
+    '#empty_option' => t('None (original image)'),
+    '#description' => t('Select the image style to use.'),
+  );
+
+  $link_types = array(
+    'content' => t('Content'),
+    'file' => t('Linked to file'),
+  );
+  $element['image_link'] = array(
+    '#title' => t('Link image to'),
+    '#type' => 'select',
+    '#default_value' => $settings['image_link'],
+    '#empty_option' => t('Nothing'),
+    '#options' => $link_types,
+  );
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function glazed_gridstack_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+  $summary = array();
+  $image_styles = image_style_options(FALSE);
+  // Unset possible 'No defined styles' option.
+  unset($image_styles['']);
+
+  if (isset($image_styles[$settings['image_style']])) {
+    $summary[] = t('URL for image style: @style', array('@style' => $image_styles[$settings['image_style']]));
+  }
+  else {
+    $summary[] = t('Original image URL');
+  }
+
+  $link_types = array(
+    'content' => t('Linked to content'),
+    'file' => t('Linked to file'),
+  );
+  // Display this setting only if image is linked.
+  if (isset($link_types[$settings['image_link']])) {
+    $summary[] = $link_types[$settings['image_link']];
+  }
+  return implode('<br />', $summary);
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function glazed_gridstack_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  if ($display['type'] != 'glazed_gridstack_formatter') {
+    return $element;
+  }
+  // Check if the formatter involves a link.
+  if ($display['settings']['image_link'] == 'content') {
+    $uri = entity_uri($entity_type, $entity);
+  }
+  elseif ($display['settings']['image_link'] == 'file') {
+    $link_file = TRUE;
+  }
+  foreach ($items as $delta => $item) {
+    $image_url = file_create_url($item['uri']);
+    if (!empty($settings['image_style'])) {
+      $image_url = image_style_url($settings['image_style'], $item['uri']);
+    }
+    if (isset($link_file)) {
+      $uri = array(
+        'path' => $image_url,
+        'options' => array(),
+      );
+    }
+    $options = array(
+      'image_url' => $image_url,
+      'path' => isset($uri) ? $uri : '',
+    );
+    $element[$delta]['#markup'] = theme('glazed_gridstack_formatter', $options);
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function glazed_gridstack_theme() {
+  return array(
+    'glazed_gridstack_formatter' => array(
+      'variables' => array(
+        'image_url' => array(),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements theme callback function.
+ */
+function theme_glazed_gridstack_formatter($variables) {
+  $output = '<div class="glazed-gridstack__img" style="background-image: url(' . $variables['image_url'] . ')"></div>';
+  if (isset($variables['path']['path'])) {
+    $path = $variables['path']['path'];
+    $options = isset($variables['path']['options']) ? $variables['path']['options'] : array();
+    // When displaying an image inside a link, the html option must be TRUE.
+    $options['html'] = TRUE;
+    $output = l($output, $path, $options);
+  }
+  return $output;
+}
+
+

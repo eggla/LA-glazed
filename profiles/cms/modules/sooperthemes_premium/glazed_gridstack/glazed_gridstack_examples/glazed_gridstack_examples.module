@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Code for the Glazed GridStack feature.
+ */
+
+/**
+ * Implements hook_views_api().
+ */
+function glazed_gridstack_examples_views_api() {
+  return array("api" => "3.0");
+}

@@ -1,0 +1,1336 @@
+// COMPASS FRAMEWORK
+
+// Disabled Functions
+.control.toggle-animations,
+.control.copy,
+.control.paste {
+  display: none!important;
+}
+.controls .glyphicon {
+  font-family: inherit!important
+}
+.glyphicon:before,
+.glyphicon::before {
+  font-family: "Glyphicons Halflings"!important;
+}
+
+
+// MODALS
+
+// Disabling the background on Modal Windows
+// Backdrops only work well when modal content is attached to the end of the page
+// In practice carbide composer and custo html snippets will add modals to the body
+// which has a lower z-index so the modal can appear behind the backdrop.
+.modal-backdrop {
+  z-index: -1!important;
+  width: 1px!important;
+  height: 1px!important;
+}
+.modal.carbide {
+  .modal-dialog {
+    margin-top: 80px;
+    color: #333;
+    // @see bootstrap basethemes overrides.css
+    z-index: 1630;
+    .tab-content {
+      a {
+        color: #cc0011 !important;
+        text-decoration: underline;
+        &:hover,
+        &:focus {
+          color: #cc0011;
+        }
+      }
+      h1, h2, h3, h4, h5, h6 {
+        color: #333;
+      }
+    }
+  }
+  .modal-header {
+    border: none;
+    background: #333;
+    color: #fff;
+    .modal-title {
+    font-size: 18px;
+    }
+    .close {
+    font-size: 30px;
+    opacity: 0.3;
+    }
+  }
+  .modal-content {
+    border-radius: 0;
+    border: none;
+  }
+  .nav-tabs {
+    padding: 0 !important;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -15px;
+    border: none;
+    background: #f0f0f0;
+    li > a {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 13px 20px;
+    font-size: 14px;
+    border-radius: 0;
+    margin: 0;
+    &:hover,
+    &:focus {
+      outline: none;
+      border:none;
+    }
+    }
+    li.active a {
+    background: #cc0011;
+    color: #fff;
+    border:none;
+    outline: none;
+    }
+    li.active a:hover {
+        background: #cc0011;
+    }
+  }
+  .tab-content {
+    padding-top: 15px;
+  }
+  .modal-body {
+    input[type=text],
+    select,
+    option {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 6px;
+      background: #ededed;
+      outline: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    .help-block,
+    .help-inline {
+      color: #bbb;
+      font-size: 13px;
+    }
+    .help-block {
+      clear: both;
+    }
+    .chosen-choices .search-field input[type=text] {
+      height: 2.5em;
+    }
+    .form-group {
+      padding-bottom: 10px;
+      position: relative;
+      input[type=text],
+      select {
+        width: auto;
+        min-width: 275px;
+      }
+      label {
+        float: left;
+        clear: both;
+        font-weight: normal;
+        color: #888;
+        width: 20%;
+      }
+      input[type=text],
+      select,
+      option {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 6px;
+        background: #ededed;
+        outline: none;
+        width: auto;
+        &:focus {
+          outline: none;
+        }
+      }
+      .views-exposed-form .views-exposed-widget {
+        float: none;
+        padding: 0;
+      }
+      > div,
+      > p,
+      > select {
+        margin-left: 20%;
+        position: relative;
+        label {
+          width: auto;
+          clear: none;
+        }
+      }
+      .checkbox {
+        min-height: 1.8em;
+
+      }
+      // BOOTSTRAP SLIDER
+      .slider {
+        position: relative;
+        display: block;
+      }
+      .slider-handle {
+        background: #000;
+      }
+      .slider + input.form-control {
+        display: block !important;
+        min-width: 50px;
+        width: 50px;
+        position: absolute;
+        left: 225px;
+        top: 0;
+        margin-top: -7px;
+      }
+      // FLAT DESIGN FORM RADIOS
+    .form-radios {
+      padding: 0;
+      background: #fff;
+      float: left;
+      width: 275px;
+      font-size: 13px;
+      box-sizing: border-box;
+      &:before {
+        content: " ";
+        display: table;
+      }
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+      .form-type-radio {
+        &:before {
+          content: " ";
+          display: table;
+        }
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+        input {
+          display: none;
+          &:checked ~ label {
+            font-weight: normal;
+            font-style: italic;
+            &:before {
+              content: '✓';
+              font-weight: bold;
+            }
+          }
+        }
+        label {
+          border: 1px solid #ddd;
+          padding: 5px 15px;
+          width: 300px;
+          margin-top: -1px;
+          margin-bottom: 0;
+          line-height: 24px;
+          float: left;
+          display: block;
+          font-size: 13px;
+          &:before {
+            content: '';
+            display: inline-block;
+            width: 25px;
+            font-size: 18px;
+            line-height: 1em;
+            color: #000;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    }
+    .col-sm-6 {
+      .form-group {
+        label {
+          float: left;
+          width: 30%;
+          font-weight: normal;
+        }
+        > div,
+        > p,
+        > select {
+          margin-left: 30%;
+        }
+
+      }
+    }
+  }
+  .modal-footer {
+    background: #555;
+    border: none;
+    padding: 0;
+    .btn {
+    border-radius: 0;
+    border: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 0;
+    }
+    .btn.save {
+      background: #cc0011;
+      color: #fff;
+      padding: 10px 20px;
+      &:hover,
+      &:focus {
+        background: #b00404;
+      }
+    }
+
+  }
+  &:before {
+    content: ' ';
+    z-index: 1610;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #000000;
+    opacity: 0.3;
+  }
+}
+
+
+///
+/// Azexo Composer CSS, needs refactoring
+///
+/*#az-ftp-modal *,
+#az-editor-modal *:not(.fa):not(.glyphicon):not(.ax-glyphicon):not(.mce-ico),
+#az-elements-modal *:not(.fa),
+#az-admin-modal *,
+#az-js-animation-modal *,
+#az-exporter *,
+#az-thumbnails *,
+#az-form-modal *,
+#az-exporter-welcome *,
+#az-template-elements-welcome *,
+#az-template-elements * {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.az-element .controls * {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.az-empty * {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height:1.6;
+}
+
+#az-editor-modal .ace_editor * {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+#az-ftp-modal a,
+#az-editor-modal a,
+#az-elements-modal a,
+#az-admin-modal a,
+#az-js-animation-modal a,
+#az-exporter a:not(.ax-list-group-item):not(.list-group-item),
+#az-thumbnails a,
+#az-form-modal a,
+#az-exporter-welcome a,
+#az-template-elements-welcome a,
+#az-template-elements a{
+  color:#428bca;
+  text-decoration:none;
+}
+#az-ftp-modal a:hover, #az-ftp-modal a:focus,
+#az-editor-modal a:hover, #az-editor-modal a:focus,
+#az-elements-modal a:hover, #az-elements-modal a:focus,
+#az-admin-modal a:hover, #az-admin-modal a:focus,
+#az-js-animation-modal a:hover, #az-js-animation-modal a:focus,
+#az-exporter a:hover:not(.ax-list-group-item):not(.list-group-item), #az-exporter a:focus:not(.ax-list-group-item):not(.list-group-item),
+#az-thumbnails a:hover, #az-thumbnails a:focus,
+#az-form-modal a:hover, #az-form-modal a:focus,
+#az-exporter-welcome a:hover, #az-exporter-welcome a:focus,
+#az-template-elements-welcome a:hover, #az-template-elements-welcome a:focus,
+#az-template-elements a:hover, #az-template-elements a:focus {
+  color:#2a6496;
+  text-decoration:none;
+}*/
+
+.carbide-editor.carbide.az-container {
+  //overflow: visible;
+  // margin-top: 34px !important;
+}
+.az-container .control {
+  min-height: 27px;
+  // Glazed Button 3d effect
+  &.btn {
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.12);
+    border-width: 0 0 4px 0;
+    border-radius: 5px;
+    padding: 6px 12px;
+  }
+  &.btn-default {
+    background: #fcfcfc;
+    color: #555;
+    border-left: 1px solid rgba(0,0,0,0.05);
+    &:hover, &:focus {
+      background: #ddd;
+    }
+  }
+  &.drag-and-drop {
+    cursor: move;
+  }
+}
+.az-container .controls {
+  line-height: 1.2em;
+  border-radius: 5px;
+  &.btn-group-xs {
+    .btn.control {
+      border-bottom-width: 2px;
+      padding: 1px 7px;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      &.default {
+        background: #aaa;
+        color: #eee;
+      }
+    }
+  }
+}
+.az-row > .controls.btn-group-xs {
+  .btn.btn-primary {
+    background: #535353;
+  }
+}
+.az-column > .controls.btn-group-xs,
+.az-section > .controls.btn-group-xs {
+  .btn.btn-primary {
+    background: #777;
+  }
+}
+.az-column > .controls.btn-group-xs {
+  .btn.drag-and-drop {
+    cursor: col-resize;
+  }
+}
+.az-tabs a[role=tab] {
+  cursor: col-resize;
+}
+div.carbide.az-container > .controls {
+  right: 0%;
+  left: auto;
+  // top: -39px;
+  -moz-transform: none;
+  -o-transform: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+div.carbide.az-container > .controls > .control:first-child {
+  padding: 7px 12px;
+  text-indent: -99999em;
+  top: 1px;
+  width: 100px;
+  background: #fcfcfc url('../carbide-builder-logo.png') no-repeat center center;
+  cursor: default;
+}
+.carbide-editor.az-container .az-container {
+  // top: -26px;
+  top: 0;
+}
+div.carbide.az-container .az-container > .controls {
+  margin-top: 26px !important;
+}
+div.carbide.az-container .az-container > .controls > .control:first-child {
+  padding: 1px 5px;
+  width: 85px;
+  text-indent: -99999em;
+  top: 1px;
+  background: #fcfcfc url('../carbide-logo.png') no-repeat center center;
+  cursor: move;
+}
+.az-step.step:not(.active) > .controls {
+  top: 0px !important;
+  left: 0px !important;
+  display: none !important;
+}
+.az-step-controls {
+  z-index: 1;
+}
+.az-element > .controls {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4100;
+  display: none;
+  text-align: center;
+  word-wrap: normal;
+  white-space: nowrap;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.carbide-editor.az-container,
+.carbide-editor .az-container,
+.carbide-editor .az-ctnr,
+.az-element {
+  min-height: 20px;
+}
+.az-separator {
+  min-height: 1px;
+}
+.az-text,
+.az-row,
+.az-column,
+.az-section {
+  min-height: 8px;
+}
+.az-container.carbide {
+  min-height: 50px;
+}
+/*Removed by Jur 24-04-2015 (experimentally) to remove padding around elements*/
+
+.carbide-editor div.az-container,
+.carbide-editor div.az-template,
+.carbide-editor div.az-row,
+.carbide-editor div.az-grid,
+.carbide-editor div.az-tabs,
+.carbide-editor div.az-accordion,
+.carbide-editor div.az-carousel,
+.carbide-editor div.az-column,
+.carbide-editor div.az-section,
+.carbide-editor div.az-link,
+.carbide-editor li.az-item,
+.carbide-editor div.az-tab,
+.carbide-editor div.az-toggle,
+.carbide-editor div.az-slide,
+.carbide-editor div.az-step,
+.carbide-editor div.az-panel,
+.carbide-editor div.az-jumbotron,
+.carbide-editor div.az-layers,
+.carbide-editor form.az-form,
+.carbide-editor div.az-wizard {
+  margin-top: 26px !important;
+}
+.carbide-editor > div.az-section {
+  margin-top: 0!important;
+}
+.az-section > .container div.az-row {
+  margin-top: 0!important;
+}
+div.az-container > .controls,
+div.az-template > .controls,
+div.az-row > .controls,
+div.az-section > .controls,
+div.az-grid > .controls,
+div.az-tabs > .controls,
+div.az-accordion > .controls,
+div.az-carousel > .controls,
+div.az-link > .controls,
+div.az-column > .controls,
+li.az-item > .controls,
+div.az-tab > .controls,
+div.az-toggle > .controls,
+div.az-slide > .controls,
+div.az-step > .controls,
+div.az-panel > .controls,
+div.az-jumbotron > .controls,
+div.az-layers > .controls,
+form.az-form > .controls,
+div.az-wizard > .controls {
+  left: 0px;
+  // top: -26px;
+  top: 0;
+  transform: none;
+}
+div.carbide-editor div.az-wizard:before,
+div.carbide-editor div.az-ctnr:before,
+div.carbide-editor div.az-element.az-row:before,
+div.carbide-editor div.az-element.az-section:before,
+div.carbide-editor div.az-element.az-grid ul:before,
+div.carbide-editor div.az-tabs .tab-content:before,
+div.carbide-editor div.az-accordion.az-element:before {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.carbide-editor .az-element:hover > .controls,
+.carbide-editor .az-element.form-group:hover > .controls,
+.carbide-editor .az-element > .controls:hover {
+  display: block;
+}
+div.az-container:hover > .controls {
+  display: block;
+}
+div.controls > .control {
+  display: inline-block;
+  float: none;
+}
+.az-element > .controls:hover {
+  z-index: 4101;
+}
+.carbide-editor div.az-layers:hover > .az-ctnr:after,
+.carbide-editor .az-layers:hover > .az-ctnr > .az-element:after {
+  content: '.';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px dotted #222;
+  border: 1px dotted rgba(0, 0, 0, 0.4);
+}
+.carbide-editor .az-row:hover .az-ctnr:after,
+.az-container.carbide:hover:after {
+  content: '';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  outline: 2px dashed #EBEBEB;
+  outline: 2px dashed rgba(125, 125, 125, 0.4);
+}
+.carbide-editor .az-element:not(.az-row):hover:after {
+  /*  content: ' ';
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  opacity: 0.2; Removed by Jur 14-04-2015 because it conflicts with background color overlays */
+}
+.az-empty {
+  display: none;
+}
+.az-empty h1 {
+  margin: 0;
+  padding: 0;
+}
+.carbide-editor .az-empty {
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  min-height: 200px;
+  font-size: 12px;
+  .lead {
+    color: #bbb;
+    text-align: center;
+  }
+}
+.carbide-editor.az-container > .az-empty {
+  position: relative;
+  min-height: 250px;
+}
+.carbide-editor .az-layers > .az-ctnr > .az-empty {
+  min-height: 100%;
+}
+.carbide-editor .az-empty .well,
+.carbide-editor .az-empty .ax-well {
+  z-index: 0;
+}
+.carbide-editor .az-empty .well:hover,
+.carbide-editor .az-empty .ax-well:hover {
+  z-index: 1;
+}
+.carbide-editor .az-empty .top {
+  background: transparent;
+}
+.carbide-editor .az-empty .top-left {
+  text-align: left;
+  position: absolute;
+  top: 0;
+}
+.carbide-editor .az-empty .bottom-left {
+  text-align: left;
+  position: absolute;
+  left: 2%;
+  bottom: 0%;
+  width: 30%;
+}
+.carbide-editor .az-empty .bottom {
+  position: absolute;
+  left: 50%;
+  bottom: 0%;
+  width: 40%;
+  -moz-transform: translate(-50%, 0%);
+  -o-transform: translate(-50%, 0%);
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translate(-50%, 0%);
+}
+.carbide-editor .az-empty .top-right {
+  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 0%;
+}
+.carbide-editor .az-empty .bottom-right {
+  text-align: right;
+  position: absolute;
+  right: 2%;
+  bottom: 0%;
+  width: 30%;
+}
+.carbide-editor .az-empty::after {
+  content: "+";
+  color: black;
+  font-family: 'Glyphicons Halflings';
+  font-weight: 400;
+  font-size: 3em;
+  opacity: 0.15;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.carbide-editor .az-empty .carbide-choose-layout {
+  color: #cc0011;
+  weight: 300;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 10px 40px;
+  border-radius: 60px;
+  border: 2px solid #d4d5d6;
+  display: inline-block;
+  transition: border-color 0.4s;
+  &:hover,
+  &:focus {
+    border-color: #cc0011;
+  }
+}
+.az-highlight {
+  z-index: 10000 !important;
+}
+.az-highlight .controls {
+  display: block !important;
+}
+.az-sortable-placeholder {
+  background-image: -webkit-repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 5px, transparent 5px, transparent 10px);
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 5px, transparent 5px, transparent 10px);
+}
+.ui-resizable {
+  position: relative;
+}
+.ui-resizable-handle {
+  position: absolute;
+  font-size: 0.1px;
+  z-index: 99999;
+  display: block;
+}
+.ui-resizable-disabled .ui-resizable-handle,
+.ui-resizable-autohide .ui-resizable-handle {
+  display: none;
+}
+.ui-resizable-n {
+  cursor: n-resize;
+  height: 7px;
+  width: 100%;
+  top: -5px;
+  left: 0;
+}
+.ui-resizable-s {
+  cursor: s-resize;
+  height: 7px;
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+.ui-resizable-e {
+  cursor: e-resize;
+  width: 7px;
+  right: -5px;
+  top: 0;
+  height: 100%;
+}
+.ui-resizable-w {
+  cursor: w-resize;
+  width: 7px;
+  left: -5px;
+  top: 0;
+  height: 100%;
+}
+.ui-resizable-se {
+  cursor: se-resize;
+  width: 12px;
+  height: 12px;
+  right: 1px;
+  bottom: 1px;
+}
+.ui-resizable-sw {
+  cursor: sw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  bottom: -5px;
+}
+.ui-resizable-nw {
+  cursor: nw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  top: -5px;
+}
+.ui-resizable-ne {
+  cursor: ne-resize;
+  width: 9px;
+  height: 9px;
+  right: -5px;
+  top: -5px;
+}
+.az-row > .controls > .popover,
+.az-row > .controls > .ax-popover {
+  max-width: 500px;
+  min-width: 340px;
+}
+.az-row > .controls > .popover.right,
+.az-row > .controls > .ax-popover.ax-right {
+  margin-left: 0px;
+}
+.az-form > .controls > .popover,
+.az-form > .controls > .ax-popover {
+  min-width: 256px;
+}
+.popover-title,
+.ax-popover-title {
+  text-align: center;
+}
+.row-layouts {
+  text-align: center;
+  word-wrap: normal;
+  white-space: nowrap;
+}
+.set-columns-layout:hover {
+  cursor: pointer;
+}
+#az-elements-tabs .filter-tags {
+  padding: 5px;
+  label {
+    padding-right: 0.5em;
+  }
+}
+#az-elements-tabs .tab-pane .well,
+#az-elements-tabs .ax-tab-pane .ax-well {
+  float: left;
+  width: 163px;
+  margin: 5px;
+  height: 130px;
+  padding: 20px 0;
+}
+#az-elements-tabs .tab-pane .well:hover,
+#az-elements-tabs .ax-tab-pane .ax-well:hover {
+  cursor: pointer;
+}
+#az-elements-tabs .tab-pane .well i,
+#az-elements-tabs .ax-tab-pane .ax-well i {
+  display: block;
+  font-size: 42px;
+  width: 100%;
+  padding-bottom: 15px;
+}
+#az-elements-tabs .tab-pane .well.carbide-cms i,
+#az-elements-tabs .ax-tab-pane .ax-well.carbide-cms i {
+  font-size: 32px;
+}
+#az-elements-tabs .tab-pane .well.carbide-saved i,
+#az-elements-tabs .ax-tab-pane .ax-well.carbide-saved i {
+  font-size: 26px;
+}
+
+#az-elements-tabs .tab-pane .page-template {
+  width: 100%;
+  height: auto;
+  padding: 15px 0;
+  cursor: pointer;
+  .lead {
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+  img {
+    border: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+  }
+  &:hover,
+  &:focus {
+    img {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+#az-editor-tabs .icons {
+  height: 350px;
+  overflow: scroll;
+}
+#az-editor-tabs .icons > span {
+  width: 6%;
+  font-size: 24px;
+  cursor: pointer;
+}
+#az-editor-tabs .icons .ui-selected {
+  color: green;
+}
+#az-editor-tabs .style .layout input {
+  position: absolute;
+  text-align: center;
+  padding: 3px 0;
+  height: 24px;
+  width: 34px;
+  margin: 0;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 12px;
+  background: #aaa;
+  color: #fff;
+}
+#az-editor-tabs .style .settings {
+  margin-top: 44px;
+}
+#az-editor-tabs .style .layout {
+  padding-top: 0;
+}
+#az-editor-tabs .style .layout .margin,
+#az-editor-tabs .style .layout .border,
+#az-editor-tabs .style .layout .padding,
+#az-editor-tabs .style .layout .content {
+  margin: 44px;
+  position: relative;
+  border: 5px solid transparent;
+}
+#az-editor-tabs .style .layout .margin {
+  background: #fff;
+  border: 1px dashed #bbb;
+}
+#az-editor-tabs .style .layout .border {
+  background: #eee;
+}
+#az-editor-tabs .style .layout .padding {
+  background: #f9f9f9;
+}
+
+#az-editor-tabs .style .layout input[name="margin_top"],
+#az-editor-tabs .style .layout input[name="border_top_width"],
+#az-editor-tabs .style .layout input[name="padding_top"] {
+  top: 11px;
+  left: 50%;
+  margin-left: -17px;
+}
+#az-editor-tabs .style .layout input[name="margin_right"],
+#az-editor-tabs .style .layout input[name="border_right_width"],
+#az-editor-tabs .style .layout input[name="padding_right"] {
+  top: 50%;
+  right: 5px;
+  margin-top: -12px;
+}
+#az-editor-tabs .style .layout input[name="margin_bottom"],
+#az-editor-tabs .style .layout input[name="border_bottom_width"],
+#az-editor-tabs .style .layout input[name="padding_bottom"] {
+  bottom: 11px;
+  left: 50%;
+  margin-left: -17px;
+}
+#az-editor-tabs .style .layout input[name="margin_left"],
+#az-editor-tabs .style .layout input[name="border_left_width"],
+#az-editor-tabs .style .layout input[name="padding_left"] {
+  top: 50%;
+  left: 5px;
+  margin-top: -12px;
+}
+#az-editor-tabs .style .layout label {
+  display: inline-block;
+  position: absolute;
+  font-size: 11px;
+  line-height: 9px;
+  top: 6px;
+  left: 5px;
+  color: #2C2C2C;
+  margin: 0;
+  padding: 0;
+}
+#az-editor-tabs .style .layout .content {
+  border: none;
+  height: 50px;
+  padding: 0px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 11px;
+  box-sizing: border-box;
+}
+#az-editor-tabs table tr td {
+  text-align: center;
+}
+/*#az-editor-tabs  table tr input.image, #az-editor-tabs  table tr input.tags, #az-editor-tabs  table tr button.remove {
+  margin-top: 20px;
+}*/
+
+#az-js-animation-form .properties .row,
+#az-js-animation-form .properties .ax-row {
+  margin-bottom: 5px;
+}
+#jstree {
+  margin-top: 10px;
+  overflow-y: auto;
+  max-height: 500px;
+}
+#images-preview {
+  margin-top: 10px;
+}
+#images-preview > div {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  cursor: move;
+}
+#images-preview .delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 0px;
+  top: 0px;
+  background-color: red;
+  z-index: 3;
+  display: inline-block;
+  cursor: pointer;
+}
+.glyphicon,
+.ax-glyphicon {
+  font-family: 'Glyphicons Halflings' !important;
+}
+div.modal-lg,
+div.ax-modal-lg {
+  width: 900px;
+}
+div.modal-dialog,
+div.ax-modal-dialog {
+  padding: 0px;
+}
+.carbide .iris-picker,
+.carbide .iris-picker * {
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.az-left-sidebar,
+.az-right-sidebar {
+  background-color: whitesmoke;
+  position: fixed;
+  top: 0px;
+  width: 500px;
+  height: 100%;
+  z-index: 10000;
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.2s;
+}
+.az-left-sidebar {
+  left: -500px;
+}
+.az-right-sidebar {
+  right: -500px;
+}
+.az-left-sidebar::after,
+.az-right-sidebar::after {
+  position: absolute;
+  content: ' ';
+  bottom: 100px;
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: whitesmoke url('../images/carbide-builder-C.png') no-repeat center center;
+  background-size: 80%;
+}
+.az-left-sidebar::after {
+  right: -50px;
+}
+.az-right-sidebar::after {
+  left: -50px;
+}
+.az-left-sidebar:hover {
+  left: 0px;
+}
+.az-right-sidebar:hover {
+  right: 0px;
+}
+.editable-highlight,
+.editable-highlight:hover,
+.styleable-highlight,
+.styleable-highlight:hover,
+.sortable-highlight,
+.sortable-highlight:hover {
+  outline: 2px dashed gray !important;
+  cursor: pointer !important;
+}
+.sortable-highlight,
+.sortable-highlight:hover {
+  outline: 2px dotted gray !important;
+  cursor: move !important;
+}
+.restoreable-highlight::after,
+.restoreable-highlight:hover::after {
+  content: ' ';
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  opacity: 0.9;
+  background-image: -webkit-repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 5px, transparent 5px, transparent 10px);
+  background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 5px, transparent 5px, transparent 10px);
+}
+.az-sortable > * {
+  position: relative;
+}
+.az-sortable-controls {
+  cursor: pointer !important;
+  position: absolute !important;
+  display: block !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: white !important;
+  z-index: 10000 !important;
+  opacity: 0.9 !important;
+  text-align: center !important;
+}
+.az-sortable-clone {
+  position: absolute !important;
+  display: block !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 50% !important;
+  color: black !important;
+  vertical-align: middle !important;
+}
+.az-sortable-remove {
+  position: absolute !important;
+  display: block !important;
+  left: 0 !important;
+  top: 50% !important;
+  width: 100% !important;
+  height: 50% !important;
+  color: black !important;
+  vertical-align: middle !important;
+}
+.nav.az-nav-list,
+.ax-nav.az-nav-list {
+  padding-left: 15px;
+  margin-bottom: 0;
+  display: none;
+}
+.nav.az-nav-list > li > a,
+.ax-nav.az-nav-list > li > a {
+  padding: 3px 15px;
+  margin-left: -15px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+  display: block;
+}
+#az-template-elements,
+#az-thumbnails,
+#az-exporter,
+#az-template-elements-welcome,
+#az-exporter-welcome,
+#az-template-elements *,
+#az-thumbnails *,
+#az-exporter *,
+#az-template-elements-welcome *,
+#az-exporter-welcome * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#az-template-elements > .nav.az-nav-list,
+#az-template-elements > .ax-nav.az-nav-list {
+  display: block;
+}
+#az-template-elements {
+  width: 200px;
+  left: -200px;
+}
+#az-template-elements:hover {
+  left: 0px;
+}
+#az-thumbnails {
+  display: none;
+  overflow-y: scroll;
+  height: 100%;
+  width: 250px;
+  position: absolute;
+  z-index: 2005;
+  left: 200px;
+  top: 0px;
+  background-color: grey;
+  padding: 10px;
+}
+#az-template-elements.az-thumbnails::after {
+  right: -200px;
+}
+.az-thumbnail {
+  cursor: move;
+  margin-bottom: 10px;
+}
+#az-exporter {
+  padding-top: 20px;
+}
+#az-exporter::after {
+  content: "\f019";
+}
+#az-template-elements-welcome {
+  background-color: whitesmoke;
+  position: fixed;
+  bottom: 100px;
+  left: 100px;
+  width: 600px;
+  z-index: 10000;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+#az-exporter-welcome {
+  background-color: whitesmoke;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  width: 300px;
+  z-index: 10000;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  box-sizing: border-box;
+}
+#az-exporter .btn-toolbar .btn-group,
+#az-exporter .ax-btn-toolbar .ax-btn-group {
+  float: none;
+  margin-bottom: 5px;
+}
+#az-exporter .list-group,
+#az-exporter .ax-list-group {
+  overflow-y: scroll;
+  height: 300px;
+}
+ul.az-browser,
+.az-messages {
+  height: 200px;
+  overflow-y: scroll;
+}
+ul.az-browser {
+  list-style-type: none;
+  padding-left: 0px;
+}
+ul.az-browser li {
+  cursor: pointer;
+  display: block;
+  margin: 5px;
+}
+ul.az-browser li::before {
+  margin-right: 10px;
+}
+.az-messages div {
+  padding: 5px;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+// New Row Element Control Buttons
+.popover .row-layouts .az-mini-container {
+  // width: 59px; // 48 px button
+  width: 47px; // 36 px button
+  /* width: 35px; */ // 24 px button
+  /* width: 23px; */ // 12 px button
+  float: left;
+  color: #555;
+  background: #fff;
+  h3.popover-title {
+    color: #555;
+  }
+  a {
+    color: #555 !important;
+    text-decoration: underline;
+  }
+  .row {
+    padding: 4px 2px 4px 2px;
+    margin-left: 0;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #dfdfdf;
+    height: 28px;
+    &:hover {
+      background: #f3f3f3;
+      border-color: #00bb00;
+      .content {
+        // background: white;
+      }
+    }
+  }
+  [class^="col"] {
+    padding-left: 1px;
+    padding-right: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .content {
+    background: #555;
+    color: silver;
+    width: 100%;
+    height: 18px;
+  }
+}
+.az-row-custom {
+  display: block;
+  clear: both;
+  width: 100%;
+}
+
+#az-editor-modal .bootstrap-switch {
+  background: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+#az-editor-modal .bootstrap-switch-handle-on,
+#az-editor-modal .bootstrap-switch-label,
+#az-editor-modal .bootstrap-switch-handle-off {
+  background-image: linear-gradient(to bottom, rgba(40, 50, 60, 0) 0%, rgba(40, 50, 60, 0.1) 100%);
+}

@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ * Code for the Glazed Portfolio feature.
+ */
+include_once 'glazed_portfolio.features.inc';
+
+/**
+ * Implements hook_update_status_alter().
+ */
+function glazed_portfolio_update_status_alter(&$projects) {
+  if (isset($projects['glazed_portfolio']) && isset($projects['glazed_portfolio']['title'])) {
+    $projects['glazed_portfolio']['title'] .=  ' ' . t('on sooperthemes.com. Click for more info.');
+  }
+}

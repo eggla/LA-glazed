@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Glazed Main Elements Examples 1 feature.
+ */
+
+include_once 'glazed_content_elements_examples_1.features.inc';

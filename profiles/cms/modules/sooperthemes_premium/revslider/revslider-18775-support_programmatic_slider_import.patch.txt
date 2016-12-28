@@ -1,0 +1,199 @@
+diff --git a/revslider.admin.inc b/revslider.admin.inc
+index c08a0c4..7b9937b 100644
+--- a/revslider.admin.inc
++++ b/revslider.admin.inc
+@@ -222,7 +222,7 @@ function revslider_admin_delete_form_submit($form, &$form_state) {
+       ->condition('id', $form['slider_id']['#value'])
+       ->execute();
+   }
+-  drupal_set_message('Successed!');
++  drupal_set_message('Succesful!');
+   $form_state['redirect'] = 'admin/content/revslider';
+ }
+ 
+@@ -474,6 +474,11 @@ function revslider_admin_import_form_validate($form, &$form_state) {
+   }
+ }
+ 
++/**
++ * Form submit handler for revslider_admin_import_form().
++ *
++ * @see revslider_admin_import_form_submit()
++ */
+ function revslider_admin_import_form_submit($form, &$form_state) {
+   if ($form_state['values']['url']) {
+     $field = 'url';
+@@ -504,45 +509,59 @@ function revslider_admin_import_form_submit($form, &$form_state) {
+     $file = $finfo->uri;
+   }
+ 
++  revslider_import($file, $form_state['values']['name']);
++
++  if (isset($finfo)) {
++    file_delete($finfo);
++  } else {
++    file_unmanaged_delete($file);
++  }
++}
++
++/**
++ * Extract a revslider archive and import content into the Drupal system
++ *
++ */
++function revslider_import($file, $name) {
++  if (!$file) {
++    drupal_set_message($field, t('File not found', 'error'));
++    return;
++  }
++
+   $directory = _revslider_admin_extract_directory();
+   try {
+     $archive = revslider_archive_extract($file, $directory);
+   }
+   catch (Exception $e) {
+-    form_set_error($field, $e->getMessage());
++    drupal_set_message('Archive extraction failed: ' . $e->getMessage(), 'error');
+     return;
+   }
+ 
+   $files = $archive->listContents();
+   if (!$files) {
+-    form_set_error($field, t('Provided archive contains no files.'));
++    drupal_set_message(t('Provided archive contains no files.'), 'error');
+     return;
+   }
+   if (in_array('slider_export.txt', $files)){//Import from WP source
+         module_load_include('inc', 'revslider', 'revslider-wp');
+-        $result = revslider_wp_import($form_state['values']['name'],$directory);
++        $result = revslider_wp_import($name,$directory);
+       if($result){
+-        drupal_set_message(t('Import successed!'));
++        drupal_set_message(t('Import succesful!'));
+       }else{
+-        form_set_error(t('Import unsuccessed!'));
++        drupal_set_message(t('Import failed!'), 'error');
+           return;
+       }
+-      if (isset($finfo)) {
+-        file_delete($finfo);
+-      } else {
+-        file_unmanaged_delete($file);
+-      }
+       file_unmanaged_delete_recursive($directory);
+-      drupal_goto('admin/content/revslider');
+     }elseif (!in_array('settings.txt', $files)) {
+-    form_set_error($field, t('Provided archive contains no %file file.', array('%file' => 'settings.txt')));
++    drupal_set_message(t('Provided archive contains no %file file.', array('%file' => 'settings.txt')), 'error');
+     return;
+   }
++  // dsm(get_defined_vars());
+ 
+   $import_contents = file_get_contents(drupal_realpath($directory) .'/settings.txt');
+   $import = drupal_json_decode(trim($import_contents));
+   if (empty($import)) {
+-    form_set_error($field, t('Something wrong! Import data failure occurs.'));
++    drupal_set_message(t('Something went wrong! Could not read import data.'), 'error');
+     return;
+   }
+ 
+@@ -671,22 +690,15 @@ function revslider_admin_import_form_submit($form, &$form_state) {
+ 
+   $values = array(
+     'id' => 0,
+-    'title' => $form_state['values']['name'],
++    'title' => $name,
+     'data' => drupal_json_encode($import),
+   );
+ 
+   revslider_save_slider($values);
+ 
+-  drupal_set_message(t('Import successed!'));
+-
+-  if (isset($finfo)) {
+-    file_delete($finfo);
+-  } else {
+-    file_unmanaged_delete($file);
+-  }
+-  file_unmanaged_delete_recursive($directory);
+-
+-  drupal_goto('admin/content/revslider');
++  drupal_set_message(t('Import succesful!'));
++  // dsm(get_defined_vars());
++  // drupal_goto('admin/content/revslider');
+ }
+ 
+ /**
+@@ -762,8 +774,36 @@ function revslider_file_exist($destination) {
+ function revslider_admin_move_file($source, $destination) {
+   $move_file = file_unmanaged_move($source, $destination, FILE_EXISTS_RENAME);
+   if ($move_file === FALSE) {
+-    drupal_set_message(t('File: %rs_file could not be import.', array('%rs_file' => $destination)), 'error');
++    drupal_set_message(t('File: %rs_file could not be imported.', array('%rs_file' => $destination)), 'error');
+   }
+ 
+   return $move_file;
+ }
++
++// Insert & update slider
++function revslider_save_slider($values) {
++  global $user;
++  $update_time = time();
++  $fields = array(
++    'title' => $values['title'],
++    'data' => trim($values['data']),
++  );
++
++  if ($values['id']) {
++    $slider = $values['id'];
++    $fields['changed'] = $update_time;
++    db_update('revolution_slides')
++      ->fields($fields)
++      ->condition('id', $slider)
++      ->execute();
++  } else {
++    $fields['uid'] = $user->uid;
++    $fields['created'] = $update_time;
++    $fields['changed'] = $update_time;
++    $slider = db_insert('revolution_slides')
++      ->fields($fields)
++      ->execute();
++  }
++
++  return $slider;
++}
+diff --git a/revslider.module b/revslider.module
+index 8b3d229..6e892cf 100644
+--- a/revslider.module
++++ b/revslider.module
+@@ -581,31 +581,3 @@ function revslider_prepaire_slider($slider) {
+   $slider = new RS($data);
+   return $slider;
+ }
+-
+-// Insert & update slider
+-function revslider_save_slider($values) {
+-  global $user;
+-  $update_time = time();
+-  $fields = array(
+-    'title' => $values['title'],
+-    'data' => trim($values['data']),
+-  );
+-
+-  if ($values['id']) {
+-    $slider = $values['id'];
+-    $fields['changed'] = $update_time;
+-    db_update('revolution_slides')
+-      ->fields($fields)
+-      ->condition('id', $slider)
+-      ->execute();
+-  } else {
+-    $fields['uid'] = $user->uid;
+-    $fields['created'] = $update_time;
+-    $fields['changed'] = $update_time;
+-    $slider = db_insert('revolution_slides')
+-      ->fields($fields)
+-      ->execute();
+-  }
+-
+-  return $slider;
+-}

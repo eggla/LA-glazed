@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file
+ * Code for the Glazed Canvas: Demo feature.
+ */
+
+include_once 'glazed_canvas_theme_settings.features.inc';
+

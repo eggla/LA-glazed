@@ -1,0 +1,8 @@
+
+; CMS Portfolio
+; -------
+
+dependencies[] = cms_portfolio
+dependencies[] = image_field_caption
+dependencies[] = image_hover_effects
+dependencies[] = views_bootstrap

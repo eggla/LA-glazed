@@ -1,0 +1,228 @@
+
+
+    // FORM ELEMENT, leave here until we have time to improve it ~Jurriaan 21-11-2015
+
+    function FormElement(parent, position) {
+      FormElement.baseclass.apply(this, arguments);
+    }
+    register_animated_element('az_form', true, FormElement);
+    mixin(FormElement.prototype, {
+      name: Drupal.t('Form'),
+      icon: 'fa fa-envelope-o',
+      description: Drupal.t('Form container. Can contain form elements for user input and any number of any other elements types.'),
+      category: Drupal.t('Layout'),
+      params: [
+        make_param_type({
+          type: 'textfield',
+          heading: Drupal.t('Name'),
+          param_name: 'name',
+          description: Drupal.t('Required.'),
+          required: true,
+        }),
+        make_param_type({
+          type: 'textfield',
+          heading: Drupal.t('Submit button title'),
+          param_name: 'submit_title',
+          value: Drupal.t('Submit'),
+        }),
+        make_param_type({
+          type: 'textfield',
+          heading: Drupal.t('Submited message'),
+          param_name: 'submited_message',
+          value: Drupal.t('Submited'),
+        }),
+        make_param_type({
+          type: 'textfield',
+          heading: Drupal.t('Action URL'),
+          param_name: 'action',
+          description: Drupal.t('URL of server script which will receive submitted form data.'),
+        }),
+      ].concat(FormElement.prototype.params),
+      is_container: true,
+      hidden: !window.carbide_online,
+      show_settings_on_create: true,
+      get_button: function() {
+        return '<div class="well text-center text-overflow" data-az-element="' + this.base + '"><i class="' + this.icon + '"></i><p>' + this.name + '</p><p class="text-muted small">' + this.description + '</p></div>';
+      },
+      get_empty: function() {
+        return '<div class="az-empty"><div class="top-left well"><h1>↖</h1>' + Drupal.t('You can add form element by mouse over this button: ') + '<span class="glyphicon glyphicon-plus-sign"></span> ' + Drupal.t('You can see all submissions by click on this button: ') + '<span class="glyphicon glyphicon-list-alt"></span></div></div>';
+      },
+      show_controls: function() {
+        if (window.carbide_editor) {
+          FormElement.baseclass.prototype.show_controls.apply(this, arguments);
+          var element = this;
+          if (this.attrs['action'] == '') {
+            $('<span title="' + title("Show submissions") + '" class="control show-submissions btn btn-default glyphicon glyphicon-list-alt" > </span>').appendTo(this.controls).click({object: this}, this.click_show_submissions);
+          }
+
+          var buttons = '<div class="form-fields btn-group btn-group-sm">';
+          for (var key in FormDataElement.prototype.form_elements) {
+            var e = FormDataElement.prototype.form_elements[key].prototype;
+            buttons += '<span title="' + title("Add") + ' ' + e.name + '" class="control btn btn-default ' + e.icon + '" data-az-element="' + key + '"></span>';
+          }
+          buttons += '</div>';
+
+          var add_field = $('<span title="' + title("Add form field") + '" class="control add-field btn btn-primary glyphicon glyphicon-plus-sign"> </span>').appendTo(this.controls)[fp + 'popover']({
+            animation: false,
+            placement:'right',
+            html: 'true',
+            trigger: 'manual',
+            //container: 'body',
+            content: buttons,
+          }).hover(function() {
+            $(add_field)[fp + 'popover']('show');
+            set_highest_zindex($(element.controls));
+            set_highest_zindex($(element.controls).find('.popover'));
+            $(element.controls).find('.popover .control').each(function() {
+              $(this).click(function() {
+                var base = $(this).attr('data-az-element');
+                var constructor = BaseElement.prototype.elements[base];
+                var child = new constructor(element, false);
+                child.update_dom();
+                element.update_dom();
+                element.update_empty();
+                if (child.show_settings_on_create)
+                  child.edit();
+                return false;
+              });
+            });
+            $(element.controls).mouseleave(function() {
+              $(add_field)[fp + 'popover']('hide');
+              $(add_field).css('display', '');
+            });
+          });
+        }
+      },
+      update_sortable: function() {
+        if (window.carbide_editor) {
+          $(this.dom_content_element).sortable({
+            items: '> .az-element',
+            connectWith: '.az-form .az-ctnr',
+            handle: '> .controls > .drag-and-drop',
+            update: this.update_sorting,
+            placeholder: 'az-sortable-placeholder',
+            forcePlaceholderSize: true,
+  //          tolerance: "pointer",
+  //          distance: 1,
+            over: function(event, ui) {
+              ui.placeholder.attr('class', ui.helper.attr('class'));
+              ui.placeholder.removeClass('ui-sortable-helper');
+              ui.placeholder.addClass('az-sortable-placeholder');
+              //$(this).closest('[data-az-id]')
+            }
+          });
+        }
+      },
+      click_show_submissions: function(e) {
+        e.data.object.show_submissions();
+        return false;
+      },
+      show_submissions: function() {
+        var element = this;
+        var container = element.get_my_container();
+        var type = container.attrs['container'].split('/')[0];
+        if ('carbide_form_submit_type' in window)
+          type = window.carbide_form_submit_type;
+        var name = container.attrs['container'].split('/')[1];
+        if ('carbide_form_submit_name' in window)
+          name = window.carbide_form_submit_name;
+        carbide_load_submissions(type, name, element.attrs['name'], function(data) {
+          $('#az-form-modal').remove();
+          var header = '<div class="modal-header"><span class="close" data-dismiss="modal" aria-hidden="true">&times;</span><h4 class="modal-title">' + element.attrs['name'] + ' ' + Drupal.t(" submissions") + '</h4></div>';
+          var footer = '<div class="modal-footer"></div>';
+          var modal = $('<div id="az-form-modal" class="modal carbide"><div class="modal-dialog modal-lg"><div class="modal-content">' + header + '<div class="modal-body"></div>' + footer + '</div></div></div>').prependTo('body');
+
+          var columns = {};
+          for (var dt in data) {
+            if (data[dt] != '') {
+              var submission = $.parseJSON(data[dt]);
+              for (var key in submission) {
+                if (!(key in columns))
+                  columns[key] = true;
+              }
+            }
+          }
+          var rows = [];
+          for (var dt in data) {
+            if (data[dt] != '') {
+              var submission = $.parseJSON(data[dt]);
+              var row = {};
+              for (var key in columns) {
+                if (key in submission) {
+                  row[key] = submission[key];
+                } else {
+                  row[key] = '';
+                }
+              }
+              rows.push(row);
+            }
+          }
+
+          var table = $('<table></table>');
+          var head = $('<thead><tr></tr></thead>').appendTo(table);
+          for (var name in columns) {
+            $(head).find('tr').append('<th>' + name + '</th>')
+          }
+          var body = $('<tbody></tbody>').appendTo(table);
+          for (var i = 0; i < rows.length; i++) {
+            var row = $('<tr></tr>').appendTo(body);
+            for (var name in columns) {
+              $('<td>' + rows[i][name] + '</td>').appendTo(row);
+            }
+          }
+
+          carbide_add_css('vendor/DataTables/media/css/jquery.dataTables.min.css', function() {
+          });
+          carbide_add_js({
+            path: 'vendor/DataTables/media/js/jquery.dataTables.min.js',
+            callback: function() {
+              $(table).dataTable();
+            }
+          });
+          $(modal).find('.modal-body').append(table);
+  //        $('#az-form-modal').find('.save').click(function() {
+  //          $('#az-form-modal')[fp+'modal']("hide");
+  //          return false;
+  //        });
+          $('#az-form-modal')[fp + 'modal']('show');
+        });
+      },
+      showed: function($) {
+        FormElement.baseclass.prototype.showed.apply(this, arguments);
+        var element = this;
+        if (this.attrs['action'] == '') {
+          if ('recaptcha_publickey' in window) {
+            $(element.dom_element).find('.g-recaptcha').attr('data-sitekey', window.recaptcha_publickey);
+          } else {
+            carbide_get_recaptcha_publickey(function(data) {
+              $(element.dom_element).find('.g-recaptcha').attr('data-sitekey', data);
+            });
+          }
+          this.add_external_js('https://www.google.com/recaptcha/api.js', function() {
+          });
+          $(element.dom_element).submit(function() {
+            var container = element.get_my_container();
+            var type = container.attrs['container'].split('/')[0];
+            if ('carbide_form_submit_type' in window)
+              type = window.carbide_form_submit_type;
+            var name = container.attrs['container'].split('/')[1];
+            if ('carbide_form_submit_name' in window)
+              name = window.carbide_form_submit_name;
+            carbide_submit_form(type, name, element.attrs['name'], $(element.dom_element).serialize(), function(data) {
+              if (data) {
+                (element.dom_element).prepend(get_alert(element.attrs['submited_message']));
+              }
+            });
+            return false;
+          });
+        }
+      },
+      render: function($) {
+        var element = this;
+        this.dom_element = $('<form action="' + this.attrs['action'] + '" method="post" class="az-element az-form ' + this.attrs['el_class'] + '" style="' + this.attrs['style'] + '" role="form" enctype="multipart/form-data"></form>');
+        this.dom_content_element = $('<div class="az-ctnr"></div>').appendTo(this.dom_element);
+        $('<div class="form-group"><div class="g-recaptcha"></div></div>').appendTo(this.dom_element);
+        $('<div class="form-group"><span class="btn btn-lg btn-primary" type="submit">' + this.attrs['submit_title'] + '</span></div>').appendTo(this.dom_element);
+        FormElement.baseclass.prototype.render.apply(this, arguments);
+      },
+    });

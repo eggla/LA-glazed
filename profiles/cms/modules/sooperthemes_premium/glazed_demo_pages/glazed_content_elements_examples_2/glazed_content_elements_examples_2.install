@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_install()
+ */
+function glazed_content_elements_examples_2_install() {
+
+  // import main slider
+  module_load_include('inc', 'revslider', 'revslider.admin');
+  $file = dirname(__FILE__)."/rs-export-slider-1.zip";
+  $file = drupal_realpath($file);
+  revslider_import($file, 'ThemePunch Demo Slider');
+  drupal_set_message('Imported ThemePunch Demo Slider.');
+}

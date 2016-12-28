@@ -1,0 +1,234 @@
+<?php
+/**
+ * @file
+ * Code for the Glazed Configuration feature.
+ */
+
+include_once 'glazed_config.features.inc';
+
+/**
+ * Implements hook_update_status_alter().
+ */
+function glazed_config_update_status_alter(&$projects) {
+  if (isset($projects['glazed_config']) && isset($projects['glazed_config']['title'])) {
+    $projects['glazed_config']['title'] .=  ' ' . t('on sooperthemes.com. Click for more info.');
+  }
+  if (isset($projects['glazed']) && isset($projects['glazed']['title'])) {
+    $projects['glazed']['title'] .=  ' ' . t('on sooperthemes.com. Click for more info.');
+  }
+}
+
+/*
+ * Implements hook_init
+ */
+function glazed_config_init() {
+
+  /**
+   * carbide Composer integration assistance
+   */
+  if ((module_exists('carbide_builder')) && (user_access('edit via carbide composer'))) {
+    if (_glazed_config_get_theme_setting('palette')) {
+      $palette = array_slice(_glazed_config_get_theme_setting('palette'), 0, 10);
+      drupal_add_js("window.sooperthemes_theme_palette = " . json_encode($palette) . ";", array('type' => 'inline'));
+    }
+  }
+}
+
+function glazed_config_preprocess_page(&$vars) {
+  global $user;
+  if ($user->uid == 1 || user_access('access administration pages')) {
+    drupal_add_js(drupal_get_path('theme', 'glazed') .'/js/glazed.admin.js', 'file');
+    drupal_add_css(drupal_get_path('theme', 'glazed') .'/css/glazed.admin.css');
+  }
+}
+
+/**
+ * Implements hook_js_alter().
+ * This code exists in glazed theme too but we need
+ * to ensure this data in admin themes too
+ */
+function glazed_config_js_alter(&$js) {
+  $theme_path = drupal_get_path('theme', 'glazed') . '/';
+  // Add Bootstrap settings.
+  $js['settings']['data'][]['glazed'] = array(
+    'glazedPath' => $theme_path,
+  );
+}
+
+/*
+ * Implements hook_form_alter
+ */
+function glazed_config_form_alter(&$form, &$form_state, $form_id){
+  if($form_id == "user_register_form"){
+    $form['account']['mail']['#description'] = '';
+  }
+}
+
+/*
+ * Calback for glazed theme settings form
+ */
+function glazed_config_settings_form_submit(&$form, $form_state) {
+  $image_fid = $form_state['values']['page_title_image'];
+  $image = file_load($image_fid);
+  if (is_object($image)) {
+    // Check to make sure that the file is set to be permanent.
+    if ($image->status == 0) {
+      // Update the status.
+      $image->status = FILE_STATUS_PERMANENT;
+      // Save the update.
+      file_save($image);
+      // Add a reference to prevent warnings.
+      file_usage_add($image, 'glazed', 'theme', 1);
+     }
+  }
+  $image_fid = $form_state['values']['background_image'];
+  $image = file_load($image_fid);
+  if (is_object($image)) {
+    // Check to make sure that the file is set to be permanent.
+    if ($image->status == 0) {
+      // Update the status.
+      $image->status = FILE_STATUS_PERMANENT;
+      // Save the update.
+      file_save($image);
+      // Add a reference to prevent warnings.
+      file_usage_add($image, 'glazed', 'theme', 1);
+     }
+  }
+}
+
+/**
+ * Implements hook_admin_paths().
+ * Needed for setting custom theme in theme settings
+ */
+function glazed_config_admin_paths() {
+  $paths = array();
+  $paths['admin/appearance/settings/*'] = FALSE;
+  return $paths;
+}
+
+/**
+ * Implements hook_custom_theme().
+ * Enable Glazed theme for preview in Glazed theme settings
+ */
+function glazed_config_custom_theme() {
+  if (arg(0) == 'admin' && arg(1) == 'appearance' && arg(2) == 'settings' && arg(3)) {
+    $current_theme = check_plain(arg(3));
+    return $current_theme;
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function glazed_config_block_info() {
+  $blocks = array();
+  $blocks['user_register'] = array(
+    'info' => t('User registration form'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  $blocks['full_screen_search'] = array(
+    'info' => t('Full screen search'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function glazed_config_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'user_register':
+      global $user;
+      $block['content']['form'] = drupal_get_form('user_register_form');
+      $block['subject'] = t('User Registration Form');
+      return $block;
+      break;
+    case 'full_screen_search':
+      if(user_access('search content')) {
+        $block['content'] = _glazed_config_search_block_content();
+        return $block;
+      }
+      break;
+  }
+}
+
+/**
+ * Helper function to generate content for full_screen_search
+ */
+function _glazed_config_search_block_content() {
+  $search_form = drupal_get_form('search_block_form');
+  $search_form['search_block_form']['#prefix'] = '<div class="full-screen-search-form-input">';
+  $search_form['search_block_form']['#prefix'].= '<label class="text-primary">' . t('Type and Press “enter” to Search') . '</label>';
+  $search_form['search_block_form']['#suffix'] = '</div>';
+  $search_form['search_block_form']['#attributes']['placeholder'] = '';
+  $search_form['search_block_form']['#attributes']['autocomplete'] = 'off';
+  $search_form['search_block_form']['#attributes']['class'][] = 'search-query';
+  $search_form['#attributes']['class'][] = 'hidden';
+  $search_form['#attributes']['class'][] = 'full-screen-search-form';
+  // Remove bootstrap_bootstrap_search_form_wrapper
+  $search_form['search_block_form']['#theme_wrappers'] = array();
+
+  // Main search button
+  $content['full_screen_search_button'] = array(
+    '#type' => 'button',
+    '#button_type' => 'button',
+    '#value' => '<span class="icon glyphicon glyphicon-search"></span>',
+    '#attributes' => array('class' => array('btn-link', 'full-screen-search-button')),
+  );
+  $content['search_form'] = $search_form;
+
+  return $content;
+}
+
+/**
+ * Taken from adaptivetheme, changed to use default theme when theme unspecified
+ * Retrieve a setting for the current theme or for a given theme.
+ *
+ * AT's stripped down optimized version of theme_get_setting().
+ * Why? Because it wayfasterbetter, emphasis on the faster which is really the
+ * only valid reason to do something as stupid as this, and it is faster,
+ * considerably faster. Doing this wiped 100ms off page generation time.
+ *
+ * @param $setting_name
+ * @param null $theme
+ * @see http://api.drupal.org/api/drupal/includes!theme.inc/function/theme_get_setting/7
+ */
+function _glazed_config_get_theme_setting($setting_name, $theme = NULL) {
+  $cache = &drupal_static(__FUNCTION__, array());
+
+  if (!isset($theme)) {
+    $theme = variable_get('theme_default', NULL);
+  }
+
+  if (empty($cache[$theme])) {
+
+    // Get the values for the theme-specific settings from the .info files
+    if ($theme) {
+      $themes = list_themes();
+      $theme_object = $themes[$theme];
+
+      // Create a list which includes the current theme and all its base themes.
+      if (isset($theme_object->base_themes)) {
+        $theme_keys = array_keys($theme_object->base_themes);
+        $theme_keys[] = $theme;
+      }
+      else {
+        $theme_keys = array($theme);
+      }
+
+      foreach ($theme_keys as $theme_key) {
+        if (!empty($themes[$theme_key]->info['settings'])) {
+          $cache[$theme] = $themes[$theme_key]->info['settings'];
+        }
+      }
+
+      // Get the saved theme-specific settings from the database.
+      $cache[$theme] = array_merge($cache[$theme], variable_get('theme_' . $theme . '_settings', array()));
+    }
+  }
+
+  return isset($cache[$theme][$setting_name]) ? $cache[$theme][$setting_name] : NULL;
+}

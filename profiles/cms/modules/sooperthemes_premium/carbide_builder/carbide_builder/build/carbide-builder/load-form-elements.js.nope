@@ -1,0 +1,21 @@
+
+  function create_carbide_form_elements() {
+    if ('carbide_form_elements' in window) {
+      for (var i = 0; i < window.carbide_form_elements.length; i++) {
+        var element = window.carbide_form_elements[i];
+        var ExternalElement = function(parent, position) {
+          ExternalElement.baseclass.apply(this, arguments);
+        }
+        register_form_data_element(element.base, ExternalElement);
+        element.baseclass = ExternalElement.baseclass;
+        element.params = element.params.concat(ExternalElement.prototype.params);
+        mixin(ExternalElement.prototype, element);
+        for (var j = 0; j < ExternalElement.prototype.params.length; j++) {
+          var param = ExternalElement.prototype.params[j];
+          var new_param = make_param_type(param);
+          ExternalElement.prototype.params[j] = new_param;
+        }
+      }
+    }
+  }
+  create_carbide_form_elements();

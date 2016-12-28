@@ -1,0 +1,24 @@
+<?php
+	/**
+	 * Implements hook_leaflet_map_info().
+	 */
+//	function hook_leaflet_map_info_alter(&$maps) {
+//	  // See https://github.com/Leaflet/Leaflet.markercluster for all options
+//	  $maps['OSM Mapnik']['settings'] += array(
+//	    'spiderfyDistanceMultiplier' => 10,
+//	  );
+//	}
+	function leaflet_javascript_views_pre_view(&$view, &$display_id, &$args) {
+		drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/leaflet_custom_controls.js');
+		
+    /// check to make sure the view has a classname
+		if ( $view->display_handler && !empty($view->display_handler->options['css_class']) ) {
+		$cln = $view->display_handler->options['css_class'];
+		$cls = 'hide-shapes';
+		/// test that the classname contains our class
+		if ( preg_match('/(^|\s+)' . preg_quote($cls) . '(\s+|$)/i', $cln) ) {
+		  /// build the path to the js, which is local to my module
+			drupal_add_js(drupal_get_path('module', 'leaflet_javascript') . '/leaflet_hide_shapes.js');
+			}
+		}
+	}

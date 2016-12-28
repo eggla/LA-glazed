@@ -1,0 +1,3 @@
+core = "7.x"
+description = "A module where we store the external javascript for controlling a leaflet map"
+name = "Leaflet Javascript"

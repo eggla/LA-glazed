@@ -1,0 +1,17 @@
+
+; CMS Events
+; -------
+
+dependencies[] = cms_events
+dependencies[] = addressfield
+dependencies[] = addressfield_tokens
+dependencies[] = date
+dependencies[] = date_api
+dependencies[] = date_views
+dependencies[] = date_popup
+dependencies[] = date_all_day
+dependencies[] = libraries
+dependencies[] = media
+dependencies[] = media_internet
+dependencies[] = registration
+variables[pathauto_node_event_pattern] = [node:title]

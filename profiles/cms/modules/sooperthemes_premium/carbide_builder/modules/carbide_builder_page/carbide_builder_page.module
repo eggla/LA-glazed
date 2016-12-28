@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Carbide Drag and Drop Content Type feature.
+ */
+
+include_once 'carbide_builder_page.features.inc';

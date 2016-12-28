@@ -1,0 +1,12 @@
+name = Glazed GridStack
+description = Glazed GridStack Views
+package = Glazed Premium Theme
+core = 7.x
+version = 7.x-1.0
+project = glazed_gridstack
+project status url = https://www.sooperthemes.com/release-history
+
+dependencies[] = views
+files[] = glazed_gridstack.views.inc
+files[] = plugins/glazed_gridstack/glazed_gridstack_gridstack_plugin_style.inc
+files[] = plugins/glazed_gridstack/glazed_gridstack_gridstack_plugin_rows.inc

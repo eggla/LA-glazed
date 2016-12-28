@@ -1,0 +1,2 @@
+<?php
+   drupal_add_js(drupal_get_path('module', 'xola_buttons') . '/xola_buttons.js');
