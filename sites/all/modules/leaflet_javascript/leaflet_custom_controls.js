@@ -30,7 +30,6 @@
 // 			Hide Region Popup "Explore" button
 			var activityType = $(".leaflet-popup-content .views-field-activity-type");
 			var goButton = $(".leaflet-popup-content a");
-			alert(activityType.text());
 			$(activityType).each( function() {
 				alert(activityType);
 /*
