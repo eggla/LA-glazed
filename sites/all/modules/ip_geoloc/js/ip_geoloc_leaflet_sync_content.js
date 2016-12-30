@@ -136,8 +136,8 @@ L.Sync =  L.Class.extend({
         duration: speedfly // in seconds
     }); 
     //adjust map so markers appear closer to bottom of screen, allowing room for popups    
-    this.map.once('zoomend', function(event) {
-    	this.zoomOut(1);
+    this.map.once('zoomend', function(event, point) {
+    	this.setZoom(zoomfly);
     	this.once('zoomend', function(event) {
     		this.panBy([0, -100]);
     	});
