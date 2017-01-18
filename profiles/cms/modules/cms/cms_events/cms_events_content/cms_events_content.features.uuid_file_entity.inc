@@ -30,7 +30,7 @@ function cms_events_content_uuid_features_default_file_entities() {
     'height' => 760,
     'width' => 1140,
     'uuid_features_packaged_file_path' => 'assets/unsplash-architect-tools.jpeg',
-    'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+    'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
   );
   $files[] = array(
     'filename' => 'unsplash-path-forest.jpg',
@@ -52,7 +52,7 @@ function cms_events_content_uuid_features_default_file_entities() {
     'height' => 760,
     'width' => 1140,
     'uuid_features_packaged_file_path' => 'assets/unsplash-path-forest.jpg',
-    'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+    'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
   );
   return $files;
 }

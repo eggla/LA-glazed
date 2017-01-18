@@ -1,3 +1,4 @@
+@charset "UTF-8";
 //colors
 $black: #000;
 $color_pink_swan: #bbb;
@@ -419,5 +420,19 @@ $font_3: 'sans-serif';
   }
   .fonts-previews p {
     margin: 0 0 20px 0;
+  }
+  #edit-import-export {
+    label {
+      width: 300px;
+    }
+    .bootstrap-switch {
+      left: 300px;
+    }
+  }
+  .glazed-settings-export {
+    width: 100%;
+    height: 400px;
+    // overflow: auto;
+    white-space: pre;
   }
 }

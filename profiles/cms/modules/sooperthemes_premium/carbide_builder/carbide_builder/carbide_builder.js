@@ -4967,7 +4967,6 @@
         value: {
           'loop': Drupal.t("Loop"),
           'mute': Drupal.t("Muted"),
-          'controls': Drupal.t("Show Controls"),
         },
         dependency: {
           'element': 'effect',
@@ -5064,7 +5063,6 @@
           }
           var loop = _.indexOf(element.attrs['video_options'].split(','), 'loop') >= 0;
           var mute = _.indexOf(element.attrs['video_options'].split(','), 'mute') >= 0;
-          var controls = _.indexOf(element.attrs['video_options'].split(','), 'controls') >= 0;
           this.add_css('vendor/jquery.mb.YTPlayer/dist/css/jquery.mb.YTPlayer.min.css', 'mb_YTPlayer' in $.fn,
             function() {});
           this.add_js_list({
@@ -5076,7 +5074,7 @@
               $(element.dom_element).waypoint(function(direction) {
                 $(element.dom_element).attr('data-property', "{videoURL:'" + youtube_parser(element.attrs[
                     'video_youtube']) + "',containment:'#" + element.id +
-                  "', showControls:true, autoPlay:true, loop:" + loop.toString() + ", mute:" +
+                  "', showControls:false, autoPlay:true, loop:" + loop.toString() + ", mute:" +
                   mute.toString() + ", startAt:" + element.attrs['video_start'] + ", stopAt:" +
                   element.attrs['video_stop'] + ", opacity:1, addRaster:false, quality:'default'}");
                 $(element.dom_element).mb_YTPlayer();

@@ -2,7 +2,7 @@ name = CMS Portfolio Content
 description = Demo content for CMS Portfolio module
 core = 7.x
 package = Glazed Drupal CMS
-version = 7.x-1.5
+version = 7.x-1.7
 project = cms_portfolio
 dependencies[] = cms_portfolio
 dependencies[] = ctools
@@ -14,7 +14,7 @@ dependencies[] = taxonomy
 dependencies[] = uuid
 dependencies[] = uuid_features
 __drupal_alter_by_ref[][node][portfolio] = portfolio
-datestamp = 1444644879
+datestamp = 1476012852
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[uuid_file_entity][] = 0c84f401-a22c-49ad-a4a4-e9325c3b5586
@@ -91,9 +91,9 @@ features_exclude[uuid_field_collection][6df570f0-153b-40b2-b4fb-2e55e5197eca] = 
 features_exclude[taxonomy][md_taxonomy_portfolio] = md_taxonomy_portfolio
 project path = /htdocs/drupal.org/cms_portfolio
 
-; Information added by Drupal.org packaging script on 2016-10-09
-version = "7.x-1.6"
+; Information added by Drupal.org packaging script on 2017-01-09
+version = "7.x-1.7"
 core = "7.x"
 project = "cms_portfolio"
-datestamp = "1476012852"
+datestamp = "1483977267"
 

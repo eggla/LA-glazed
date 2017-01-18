@@ -107,7 +107,7 @@ body { background-size: auto; }
   height: 90px;
   line-height: 90px;
 }
-.body--glazed-nav-desktop .glazed-header--top #block-glazed-config-full-screen-search {
+.body--glazed-nav-desktop .glazed-header--top #block-glazed-helper-full-screen-search {
   height: 90px;
   line-height: 90px;
 }
@@ -116,7 +116,7 @@ body { background-size: auto; }
   height: 60px;
   line-height: 60px;
 }
-.body--glazed-nav-desktop .glazed-header--top.affix #block-glazed-config-full-screen-search {
+.body--glazed-nav-desktop .glazed-header--top.affix #block-glazed-helper-full-screen-search {
     height: 60px;
     line-height: 60px;
 }
@@ -132,7 +132,7 @@ body { background-size: auto; }
 .body--glazed-nav-mobile .glazed-header .navbar-toggle {
   height: 60px;
 }
-.body--glazed-nav-mobile .glazed-header #block-glazed-config-full-screen-search {
+.body--glazed-nav-mobile .glazed-header #block-glazed-helper-full-screen-search {
   height: 60px;
   line-height: 60px;
 }
