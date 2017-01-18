@@ -57,4 +57,5 @@ function cms_blog_install() {
       ->fields($block)
       ->execute();
   }
+  module_enable(array('comment'));
 }

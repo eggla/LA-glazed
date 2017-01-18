@@ -143,8 +143,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:17:48 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:17:48 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => '6 bits of Drupal programming advice that will land you in prison',
@@ -271,8 +271,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:22:02 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:22:02 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => 'The 4 best Drupal Tricks of all time',
@@ -391,8 +391,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:25:28 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:25:28 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => '10 reasons you\'d want to be stuck in an elevator with Dries',
@@ -521,8 +521,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:17:48 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:17:48 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => 'Examples of the most controversial Drupal modules',
@@ -653,8 +653,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:20:28 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:20:28 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => '10 ways people have gotten rich with Drupal',
@@ -783,8 +783,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:23:06 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:23:06 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => '5 amazing things you probably didn\'t know about Drupal',
@@ -909,8 +909,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:24:21 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:24:21 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   $nodes[] = array(
   'title' => '7 ways to grow your Drupal business',
@@ -1047,8 +1047,8 @@ function cms_blog_content_uuid_features_default_content() {
   ),
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
-  'date' => '2016-02-08 20:17:48 +0000',
-  'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+  'date' => '2016-02-08 21:17:48 +0100',
+  'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
 );
   return $nodes;
 }

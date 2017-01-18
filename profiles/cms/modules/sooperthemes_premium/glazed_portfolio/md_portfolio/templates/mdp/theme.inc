@@ -241,6 +241,11 @@ function template_preprocess_md_portfolio_mdp_plugin_rows(&$vars) {
     'md_level_height' => ''
   );
   $md_style = $view->style_plugin->options;
+
+  // Created the required variables.
+  $field_data_node = _md_portfolio_get_node_field_name($vars);
+  $vars['row']->nid = $vars['row']->_field_data[$field_data_node]['entity']->nid;
+
   if ((!isset($vars['options']['md_rows'])) || (count($vars['options']['md_rows']) != count($md_fields))) {
     // if field in row option != field list or do not exits md_rows
     foreach ($md_fields as $key => $value) {
@@ -325,8 +330,8 @@ function template_preprocess_md_portfolio_mdp_plugin_rows(&$vars) {
       $md_style['md_style_view']['filter_default_field'] = $md_arg_temp[1];
     }
     $filter_field = isset($md_style['md_style_view']['filter_default_field']) ? $md_style['md_style_view']['filter_default_field'] : NULL;
-    if ($filter_field != NULL) {
-      $entity = $results[$md_index]->_field_data['nid']['entity'];
+    if ($filter_field != NULL && $filter_field != '0') {
+      $entity = $results[$md_index]->_field_data[$field_data_node]['entity'];
       $filter_field_data = field_get_items('node', $entity, $filter_field, $entity->language);
 
       if (is_array($filter_field_data)) {
@@ -369,4 +374,22 @@ function template_preprocess_md_portfolio_mdp_plugin_rows(&$vars) {
   $md_data['row_style'] = $row_style;
 
   $vars['md_data'] = $md_data;
+}
+
+/**
+ * Helper function to get field_name which contain node information.
+ */
+function _md_portfolio_get_node_field_name($vars) {
+
+  // Saved data for each view display.
+  $field_name = &drupal_static(__FUNCTION__ . '[' . $vars['view']->name . '][' . $vars['view']->current_display . ']', '');
+  if (empty($field_name)) {
+    foreach ($vars['row']->_field_data as $key => $field) {
+      if ($field['entity_type'] = 'node' && is_object($field['entity'])) {
+        $field_name = $key;
+      }
+    }
+  }
+
+  return $field_name;
 }

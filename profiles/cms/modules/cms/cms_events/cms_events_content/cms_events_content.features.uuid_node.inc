@@ -23,7 +23,6 @@ function cms_events_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '48883b0b-2c9f-449c-b9c0-ea027e23c729',
-  'field_glazed_content_design' => array(),
   'body' => array(
     'und' => array(
       0 => array(
@@ -84,6 +83,7 @@ function cms_events_content_uuid_features_default_content() {
     ),
   ),
   'field_page_attachments' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -145,7 +145,7 @@ function cms_events_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-04-29 12:36:40 +0200',
-  'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
 );
   $nodes[] = array(
   'title' => 'Lorem Startup Festival 2018',
@@ -160,7 +160,6 @@ function cms_events_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '90fbf58c-63a9-437c-981a-dbfd9233b456',
-  'field_glazed_content_design' => array(),
   'body' => array(
     'und' => array(
       0 => array(
@@ -216,6 +215,7 @@ function cms_events_content_uuid_features_default_content() {
     ),
   ),
   'field_page_attachments' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -277,7 +277,7 @@ function cms_events_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2016-07-11 22:49:11 +0200',
-  'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
 );
   $nodes[] = array(
   'title' => 'Press Conference for XYZ 2.0',
@@ -292,7 +292,6 @@ function cms_events_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => 'b8915f9f-a2aa-4e14-809d-73f9f61df9d7',
-  'field_glazed_content_design' => array(),
   'body' => array(
     'und' => array(
       0 => array(
@@ -350,6 +349,7 @@ function cms_events_content_uuid_features_default_content() {
     ),
   ),
   'field_page_attachments' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -411,7 +411,7 @@ function cms_events_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-28 15:03:57 +0200',
-  'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
 );
   $nodes[] = array(
   'title' => 'Annual Symposium',
@@ -426,7 +426,6 @@ function cms_events_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => 'ed670241-b0ab-468a-a377-58817c110128',
-  'field_glazed_content_design' => array(),
   'body' => array(
     'und' => array(
       0 => array(
@@ -488,6 +487,7 @@ function cms_events_content_uuid_features_default_content() {
     ),
   ),
   'field_page_attachments' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -549,7 +549,7 @@ function cms_events_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2014-04-15 02:35:28 +0200',
-  'user_uuid' => '8c6f00e6-0f49-4298-a9a9-c0897170b8fa',
+  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
 );
   return $nodes;
 }

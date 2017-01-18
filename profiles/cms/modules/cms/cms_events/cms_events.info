@@ -1,7 +1,7 @@
 name = Glazed Drupal CMS Events
 core = 7.x
 package = Glazed Drupal CMS
-version = 7.x-1.3
+version = 7.x-1.4
 project = cms_events
 dependencies[] = addressfield
 dependencies[] = addressfield_tokens
@@ -89,9 +89,9 @@ features_exclude[variable][menu_options_event] = menu_options_event
 features_exclude[variable][menu_parent_event] = menu_parent_event
 project path = /htdocs/drupal.org/
 
-; Information added by Drupal.org packaging script on 2016-10-03
-version = "7.x-1.3"
+; Information added by Drupal.org packaging script on 2017-01-06
+version = "7.x-1.4"
 core = "7.x"
 project = "cms_events"
-datestamp = "1475499577"
+datestamp = "1483716883"
 

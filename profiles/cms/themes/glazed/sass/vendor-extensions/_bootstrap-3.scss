@@ -80,12 +80,12 @@ div.lead {
 }
 
 .btn-sm {
-  padding: 1px 5px;
+  padding: 2px 8px;
   border-bottom-width: 2px;
   border-left-width: 2px;
 }
 
-$btn-primary-color: $white-broken;
+$btn-primary-color: $silver;
 $btn-primary-hover-color: $accent1;
 $btn-primary-bg: $primary;
 $btn-primary-border: $primary;
@@ -164,10 +164,10 @@ a.text-primary:focus {
   .nav > li > a:hover,
   .nav > li > a:focus,
   .nav > li > a.active {
-    color: $white-broken;
+    color: $silver;
     background: $primary;
     .glyphicon {
-      color: $white-broken;
+      color: $silver;
     }
   }
 }
@@ -181,7 +181,7 @@ a.text-primary:focus {
 }
 
 blockquote {
-  border-color: $white-broken;
+  border-color: $silver;
 }
 blockquote footer, blockquote small, blockquote .small {
   color: inherit;
@@ -193,11 +193,11 @@ blockquote footer, blockquote small, blockquote .small {
   background: #000;
   background: rgba(0,0,0,0.6);
   border-radius: 0;
-  color: $white-broken;
+  color: $silver;
   padding:30px;
   border: none;
   h1, h2, h3, h4, h5, h6 {
-    color: $white-broken;
+    color: $silver;
   }
 }
 
@@ -241,7 +241,7 @@ blockquote footer, blockquote small, blockquote .small {
 
 // Disabling the background on Modal Windows
 // Backdrops only work well when modal content is attached to the end of the page
-// In practice carbide composer and custo html snippets will add modals to the body
+// In practice glazed builder and custo html snippets will add modals to the body
 // which has a lower z-index so the modal can appear behind the backdrop.
 .modal-backdrop {
     z-index: -1!important;
@@ -269,7 +269,7 @@ blockquote footer, blockquote small, blockquote .small {
     }
     &:before {
         content: ' ';
-        z-index: 1610;
+        z-index: 4610;
         position: fixed;
         top: 0;
         right: 0;
@@ -316,7 +316,7 @@ blockquote footer, blockquote small, blockquote .small {
   &.tabs--primary {
     > li {
       position: relative;
-      z-index: 1100; // fix covered buttons under header when page title is hidden (e.g. landscaper demo homepage)
+      z-index: 4100; // fix covered buttons under header when page title is hidden (e.g. landscaper demo homepage)
       > a {
         background-color: white;
       }
