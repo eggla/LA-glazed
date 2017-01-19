@@ -94,11 +94,11 @@ body { background-size: auto; }
 }
 
 .body--glazed-nav-desktop #navbar.glazed-header--top {
-  background-color: rgba(126,206,253,1);
+  background-color: #7ecefd;
   opacity: 1;
 }
 .body--glazed-nav-desktop #navbar.glazed-header--top.affix {
-  background-color: rgba(126,206,253,0.9);
+  background-color: #7ecefd;
   opacity: 1;
 }
 
@@ -107,7 +107,7 @@ body { background-size: auto; }
   height: 90px;
   line-height: 90px;
 }
-.body--glazed-nav-desktop .glazed-header--top #block-glazed-config-full-screen-search {
+.body--glazed-nav-desktop .glazed-header--top #block-glazed-helper-full-screen-search {
   height: 90px;
   line-height: 90px;
 }
@@ -116,7 +116,7 @@ body { background-size: auto; }
   height: 60px;
   line-height: 60px;
 }
-.body--glazed-nav-desktop .glazed-header--top.affix #block-glazed-config-full-screen-search {
+.body--glazed-nav-desktop .glazed-header--top.affix #block-glazed-helper-full-screen-search {
     height: 60px;
     line-height: 60px;
 }
@@ -126,13 +126,19 @@ body { background-size: auto; }
 .body--glazed-nav-desktop .glazed-header--top.affix .nav-child-fixed-width {
   top: 60;
 }
-.body--glazed-nav-desktop.body--glazed-header-overlay .page-title-full-width-container  { padding-top: 120px }
+.body--glazed-nav-desktop.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 90px !important }
+
+html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 118px !important }
+
+  html.js .body--glazed-nav-desktop.toolbar.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 120px !important }
+
+  html.js .body--glazed-nav-desktop.toolbar-drawer.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 154px !important }
 
 .body--glazed-nav-mobile .glazed-header .navbar-header .wrap-branding,
 .body--glazed-nav-mobile .glazed-header .navbar-toggle {
   height: 60px;
 }
-.body--glazed-nav-mobile .glazed-header #block-glazed-config-full-screen-search {
+.body--glazed-nav-mobile .glazed-header #block-glazed-helper-full-screen-search {
   height: 60px;
   line-height: 60px;
 }

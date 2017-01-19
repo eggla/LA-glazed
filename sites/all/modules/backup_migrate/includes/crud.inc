@@ -908,7 +908,6 @@ class backup_migrate_item {
    * Get all of the given items.
    */
   function all_items() {
-    static $cache = array();
     $items = array();
 
     // Get any items stored as a variable. This allows destinations to be defined in settings.php
