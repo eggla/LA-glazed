@@ -55,6 +55,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -79,11 +81,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -145,7 +145,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:55:00 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Stationary Branding',
@@ -192,6 +192,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -212,11 +214,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -278,7 +278,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:55:00 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Stationary Design',
@@ -293,7 +293,21 @@ function cms_portfolio_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '46776433-49a0-4da7-bf2a-35f97342e47c',
-  'body' => array(),
+  'body' => array(
+    'und' => array(
+      0 => array(
+        'value' => '<div>
+	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+
+	<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
+</div>
+',
+        'summary' => '',
+        'format' => 'wysiwyg_full',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
   'field_cms_portfolio_client' => array(
     'und' => array(
       0 => array(
@@ -311,6 +325,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -335,11 +351,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -401,7 +415,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:29:35 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'B&W Photography',
@@ -420,9 +434,9 @@ function cms_portfolio_content_uuid_features_default_content() {
     'und' => array(
       0 => array(
         'value' => '<div>
-	<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
 
-	<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+	<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
 </div>
 ',
         'summary' => '',
@@ -448,6 +462,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -475,11 +491,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -541,7 +555,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:21:43 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Maniac Typeface',
@@ -556,7 +570,21 @@ function cms_portfolio_content_uuid_features_default_content() {
   'tnid' => 0,
   'translate' => 0,
   'uuid' => '6e95a721-dc10-4df8-9169-66eee9cdf916',
-  'body' => array(),
+  'body' => array(
+    'und' => array(
+      0 => array(
+        'value' => '<div>
+	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+
+	<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen.</p>
+</div>
+',
+        'summary' => '',
+        'format' => 'wysiwyg_full',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
   'field_cms_portfolio_client' => array(
     'und' => array(
       0 => array(
@@ -574,6 +602,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -594,11 +624,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -660,7 +688,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:30:25 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Apple Watch Concept',
@@ -702,6 +730,14 @@ function cms_portfolio_content_uuid_features_default_content() {
       0 => array(
         'value' => 'Pityful a rethoric',
         'format' => NULL,
+      ),
+    ),
+  ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(
+    'und' => array(
+      0 => array(
+        'value' => 'sidecaption',
       ),
     ),
   ),
@@ -749,15 +785,6 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(
-    'und' => array(
-      0 => array(
-        'value' => 'sidecaption',
-      ),
-    ),
-  ),
   'field_project_details_layout' => array(
     'und' => array(
       0 => array(
@@ -766,6 +793,7 @@ function cms_portfolio_content_uuid_features_default_content() {
     ),
   ),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -827,7 +855,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-28 11:09:56 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'CD Cover',
@@ -872,6 +900,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -896,11 +926,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -962,7 +990,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-28 10:31:06 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Gravity Paper',
@@ -1007,6 +1035,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -1031,11 +1061,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -1097,7 +1125,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-27 10:55:00 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   $nodes[] = array(
   'title' => 'Body Paint',
@@ -1152,6 +1180,8 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
+  'field_comparison_images' => array(),
+  'field_image_display_style' => array(),
   'field_page_attachments' => array(),
   'field_portfolio_category' => array(
     'und' => array(
@@ -1187,11 +1217,9 @@ function cms_portfolio_content_uuid_features_default_content() {
       ),
     ),
   ),
-  'field_glazed_content_design' => array(),
-  'field_comparison_images' => array(),
-  'field_image_display_style' => array(),
   'field_project_details_layout' => array(),
   'field_project_sidebar' => array(),
+  'field_glazed_content_design' => array(),
   'rdf_mapping' => array(
     'rdftype' => array(
       0 => 'sioc:Item',
@@ -1253,7 +1281,7 @@ function cms_portfolio_content_uuid_features_default_content() {
   'comment_count' => 0,
   'pathauto_perform_alias' => FALSE,
   'date' => '2015-08-28 10:09:07 +0200',
-  'user_uuid' => '95ca54ec-be6f-43ad-a9c5-c76916ea16c7',
+  'user_uuid' => 'd437be72-0460-46e8-9f03-fe2ba9b6d47a',
 );
   return $nodes;
 }

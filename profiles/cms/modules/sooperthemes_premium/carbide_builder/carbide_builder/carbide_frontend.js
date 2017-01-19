@@ -928,7 +928,7 @@ SectionElement.prototype.showed=function ($) {
               $(element.dom_element).waypoint(function(direction) {
                 $(element.dom_element).attr('data-property', "{videoURL:'" + youtube_parser(element.attrs[
                     'video_youtube']) + "',containment:'#" + element.id +
-                  "', showControls:true, autoPlay:true, loop:" + loop.toString() + ", mute:" +
+                  "', showControls:false, autoPlay:true, loop:" + loop.toString() + ", mute:" +
                   mute.toString() + ", startAt:" + element.attrs['video_start'] + ", stopAt:" +
                   element.attrs['video_stop'] + ", opacity:1, addRaster:false, quality:'default'}");
                 $(element.dom_element).mb_YTPlayer();

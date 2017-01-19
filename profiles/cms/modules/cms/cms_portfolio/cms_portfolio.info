@@ -1,7 +1,7 @@
 name = CMS Portfolio
 core = 7.x
 package = Glazed Drupal CMS
-version = 7.x-1.6
+version = 7.x-1.7
 project = cms_portfolio
 dependencies[] = cms_core
 dependencies[] = cms_portfolio
@@ -89,9 +89,9 @@ features_exclude[field_instance][node-portfolio-field_mdp_categories] = node-por
 features_exclude[taxonomy][md_taxonomy_portfolio] = md_taxonomy_portfolio
 project path = /htdocs/drupal.org
 
-; Information added by Drupal.org packaging script on 2016-10-09
-version = "7.x-1.6"
+; Information added by Drupal.org packaging script on 2017-01-09
+version = "7.x-1.7"
 core = "7.x"
 project = "cms_portfolio"
-datestamp = "1476012852"
+datestamp = "1483977267"
 

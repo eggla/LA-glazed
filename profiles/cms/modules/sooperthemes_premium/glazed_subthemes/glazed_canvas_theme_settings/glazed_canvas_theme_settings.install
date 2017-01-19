@@ -20,6 +20,19 @@ function glazed_canvas_theme_settings_install() {
   $themesettings = variable_get('themesettings');
   $blocks = array(
     array(
+      'module' => 'system',
+      'delta' => 'main-menu',
+      'theme' => $cms_theme,
+      'status' => '1',
+      'visibility' => '0',
+      'weight' => '1',
+      'region' => 'navigation',
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => '-1',
+      'css_class' => '',
+    ),
+    array(
       'module' => 'bean',
       'delta' => 'contact-block',
       'theme' => $cms_theme,

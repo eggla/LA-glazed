@@ -160,9 +160,10 @@ function cms_core_content_enable() {
     $cms_theme = variable_get('theme_default', 'bartik');
   }
   if ($cms_theme == 'glazed' OR $cms_theme == 'glazed_free') {
-    require_once(drupal_get_path('theme', $cms_theme) . '/glazed_callbacks.inc');
+    require_once(drupal_get_path('theme', $cms_theme) . '/' . $cms_theme . '_callbacks.inc');
     _color_module_css_write($cms_theme);
-    glazed_css_cache_build($cms_theme);
+    $css_function = $cms_theme . '_css_cache_build';
+    $css_function($cms_theme);
   }
 
   // Set default_demo_light homepage

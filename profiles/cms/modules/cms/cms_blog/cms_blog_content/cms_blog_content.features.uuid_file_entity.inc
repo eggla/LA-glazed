@@ -30,7 +30,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1280,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/LGhxuAbT5Wop4JYcrMpV_IMG_3808.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'photo-1444927714506-8492d94b4e3d.jpg',
@@ -52,7 +52,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1272,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/photo-1444927714506-8492d94b4e3d.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'photo-1436367050586-7c605120bf73.jpg',
@@ -74,7 +74,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1328,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/photo-1436367050586-7c605120bf73.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'unsplash-pineapple.jpeg',
@@ -96,7 +96,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 760,
     'width' => 1140,
     'uuid_features_packaged_file_path' => 'assets/unsplash-pineapple.jpeg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'unsplash-flower-makro.jpg',
@@ -118,7 +118,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1442,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/unsplash-flower-makro.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'photo-1416862291207-4ca732144d83.jpg',
@@ -140,7 +140,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1285,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/photo-1416862291207-4ca732144d83.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'photo-1446160657592-4782fb76fb99.jpg',
@@ -162,7 +162,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1282,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/photo-1446160657592-4782fb76fb99.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'photo-1439761414027-4f4ebeeda3a3.jpg',
@@ -184,7 +184,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1280,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/photo-1439761414027-4f4ebeeda3a3.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   $files[] = array(
     'filename' => 'OSASuBX1SGu4kb3ozvne_IMG_1088.jpg',
@@ -206,7 +206,7 @@ function cms_blog_content_uuid_features_default_file_entities() {
     'height' => 1280,
     'width' => 1920,
     'uuid_features_packaged_file_path' => 'assets/OSASuBX1SGu4kb3ozvne_IMG_1088.jpg',
-    'user_uuid' => '02eb5f9e-a86c-401d-ab0b-51b5e02ad5a7',
+    'user_uuid' => '850cccae-b3af-41bf-998a-e95466e94995',
   );
   return $files;
 }

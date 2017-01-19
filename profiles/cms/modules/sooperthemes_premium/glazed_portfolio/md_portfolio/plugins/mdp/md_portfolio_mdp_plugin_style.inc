@@ -302,14 +302,21 @@ class MdPortfolioPluginStyle extends views_plugin_style {
   function get_field_img_url($index, $field) {
     $field_name = 'field_' . $field;
     $data_field = $this->view->result[$index];
-    $images = $data_field->$field_name;
-    $image = $images[0];
-    $image_style = $image['rendered']['#image_style'];
-    $image_uri = $image['raw']['uri'];
+    if (empty($data_field->{$field_name})) {
+      $image_style = $this->view->field[$field]->options['settings']['image_style'];
+      $image_uri = $this->view->result[$index]->_field_data[$field]['entity']->{$field}[LANGUAGE_NONE][0]['uri'];
+    }
+    else {
+      $images = $data_field->{$field_name};
+      $image = $images[0];
+      $image_style = $image['rendered']['#image_style'];
+      $image_uri = $image['raw']['uri'];
+    }
     $image_url = array(
-      'original' => file_create_url($image_uri)
+      'original' => file_create_url($image_uri),
     );
     $image_url['style'] = $image_style == '' ? file_create_url($image_uri) : image_style_url($image_style, $image_uri);
+
     return $image_url;
   }
 }

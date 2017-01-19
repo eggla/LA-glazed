@@ -98,18 +98,27 @@ body { background-size: auto; }
   opacity: 1;
 }
 .body--glazed-nav-desktop #navbar.glazed-header--top.affix {
+<<<<<<< HEAD
   background-color: #7ecefd;
+=======
+  background-color: rgba(126,206,253,.9);
+>>>>>>> origin/laptop-glazed
   opacity: 1;
 }
 
 .body--glazed-nav-desktop .glazed-header--top .menu > li > a,
 .body--glazed-nav-desktop .glazed-header--top .wrap-branding {
-  height: 90px;
-  line-height: 90px;
+  height: 100px;
+  line-height: 100px;
 }
 .body--glazed-nav-desktop .glazed-header--top #block-glazed-helper-full-screen-search {
+<<<<<<< HEAD
   height: 90px;
   line-height: 90px;
+=======
+  height: 100px;
+  line-height: 100px;
+>>>>>>> origin/laptop-glazed
 }
 .body--glazed-nav-desktop .glazed-header--top.affix .menu > li > a,
 .body--glazed-nav-desktop .glazed-header--top.affix .navbar-header .wrap-branding {
@@ -121,11 +130,12 @@ body { background-size: auto; }
     line-height: 60px;
 }
 .body--glazed-nav-desktop .nav-child-fixed-width {
-  top: 90px;
+  top: 100px;
 }
 .body--glazed-nav-desktop .glazed-header--top.affix .nav-child-fixed-width {
   top: 60;
 }
+<<<<<<< HEAD
 .body--glazed-nav-desktop.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 90px !important }
 
 html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 118px !important }
@@ -133,6 +143,9 @@ html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--gla
   html.js .body--glazed-nav-desktop.toolbar.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 120px !important }
 
   html.js .body--glazed-nav-desktop.toolbar-drawer.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 154px !important }
+=======
+.body--glazed-nav-desktop.body--glazed-header-overlay .page-title-full-width-container  { padding-top: 130px }
+>>>>>>> origin/laptop-glazed
 
 .body--glazed-nav-mobile .glazed-header .navbar-header .wrap-branding,
 .body--glazed-nav-mobile .glazed-header .navbar-toggle {

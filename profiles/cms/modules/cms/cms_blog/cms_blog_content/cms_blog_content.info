@@ -2,7 +2,7 @@ name = Glazed Drupal CMS Blog Content
 description = Demo content for CMS Blog module
 core = 7.x
 package = Glazed Drupal CMS
-version = 7.x-1.3
+version = 7.x-1.7
 project = cms_blog
 dependencies[] = cms_blog
 dependencies[] = ctools
@@ -13,7 +13,7 @@ dependencies[] = strongarm
 dependencies[] = taxonomy
 dependencies[] = uuid_features
 __drupal_alter_by_ref[][node][blog] = blog
-datestamp = 1455035656
+datestamp = 1475499245
 features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[uuid_file_entity][] = 0072a0d6-2dea-4f28-b986-7b7a690db0ef
@@ -45,8 +45,9 @@ features[uuid_term][] = f870ff3e-acef-4e3e-8958-1e10ef0565ed
 features_exclude[dependencies][uuid] = uuid
 features_exclude[dependencies][bg_image_formatter] = bg_image_formatter
 features_exclude[dependencies][media] = media
-features_exclude[dependencies][glazed_config] = glazed_config
+features_exclude[dependencies][glazed_helper] = glazed_helper
 features_exclude[dependencies][cms_core_content] = cms_core_content
+features_exclude[dependencies][glazed_helper] = glazed_helper
 features_exclude[field_base][field_glazed_header_image] = field_glazed_header_image
 features_exclude[field_base][field_test_file_field] = field_test_file_field
 features_exclude[field_instance][node-blog-field_glazed_header_image] = node-blog-field_glazed_header_image
@@ -64,9 +65,9 @@ features_exclude[variable][menu_options_blog] = menu_options_blog
 features_exclude[variable][menu_parent_blog] = menu_parent_blog
 project path = /htdocs/drupal.org/cms_blog
 
-; Information added by Drupal.org packaging script on 2016-10-03
-version = "7.x-1.5"
+; Information added by Drupal.org packaging script on 2017-01-09
+version = "7.x-1.8"
 core = "7.x"
 project = "cms_blog"
-datestamp = "1475499245"
+datestamp = "1483993761"
 
