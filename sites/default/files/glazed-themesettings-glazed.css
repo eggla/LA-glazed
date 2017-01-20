@@ -1,6 +1,6 @@
 body, p, .lead { line-height:  1.5 } 
 body { font-size:  20px } 
-.glazed-header--top #glazed-main-menu .nav > li > a, .glazed-header--side #glazed-main-menu .nav a  { font-size:  14px } 
+.glazed-header--top #glazed-main-menu .nav > li > a, .glazed-header--side #glazed-main-menu .nav a  { font-size:  13px } 
 h1,h2,h3,h4,h5,h6 { line-height:  1.1; } 
 h1 { font-size:  42px; } 
 h2 { font-size:  36px; } 
@@ -21,7 +21,7 @@ hr {  background-color:  #cccccc; }
 
 #page-title { text-align:  left } 
 
-#page-title .page-title { height:  50px } 
+#page-title .page-title { height:  60px } 
 
 .page-title-full-width-container:after { opacity:  1 } 
 
@@ -98,27 +98,18 @@ body { background-size: auto; }
   opacity: 1;
 }
 .body--glazed-nav-desktop #navbar.glazed-header--top.affix {
-<<<<<<< HEAD
   background-color: #7ecefd;
-=======
-  background-color: rgba(126,206,253,.9);
->>>>>>> origin/laptop-glazed
   opacity: 1;
 }
 
 .body--glazed-nav-desktop .glazed-header--top .menu > li > a,
 .body--glazed-nav-desktop .glazed-header--top .wrap-branding {
-  height: 100px;
-  line-height: 100px;
-}
-.body--glazed-nav-desktop .glazed-header--top #block-glazed-helper-full-screen-search {
-<<<<<<< HEAD
   height: 90px;
   line-height: 90px;
-=======
-  height: 100px;
-  line-height: 100px;
->>>>>>> origin/laptop-glazed
+}
+.body--glazed-nav-desktop .glazed-header--top #block-glazed-helper-full-screen-search {
+  height: 90px;
+  line-height: 90px;
 }
 .body--glazed-nav-desktop .glazed-header--top.affix .menu > li > a,
 .body--glazed-nav-desktop .glazed-header--top.affix .navbar-header .wrap-branding {
@@ -130,12 +121,11 @@ body { background-size: auto; }
     line-height: 60px;
 }
 .body--glazed-nav-desktop .nav-child-fixed-width {
-  top: 100px;
+  top: 90px;
 }
 .body--glazed-nav-desktop .glazed-header--top.affix .nav-child-fixed-width {
   top: 60;
 }
-<<<<<<< HEAD
 .body--glazed-nav-desktop.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 90px !important }
 
 html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 118px !important }
@@ -143,9 +133,6 @@ html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--gla
   html.js .body--glazed-nav-desktop.toolbar.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 120px !important }
 
   html.js .body--glazed-nav-desktop.toolbar-drawer.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 154px !important }
-=======
-.body--glazed-nav-desktop.body--glazed-header-overlay .page-title-full-width-container  { padding-top: 130px }
->>>>>>> origin/laptop-glazed
 
 .body--glazed-nav-mobile .glazed-header .navbar-header .wrap-branding,
 .body--glazed-nav-mobile .glazed-header .navbar-toggle {
@@ -175,8 +162,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 nav,nav ul li,nav a {
-  font-family: "Titillium Web SemiBold", "Titillium Web";
-  font-weight: 600;
+  font-family: "Titillium Web", "Titillium Web";
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -339,6 +326,11 @@ Navbar Settings
 	z-index:1000;
 }
 
+.glazed-header .navbar-container  {
+        padding-left: 25px;
+        padding-right: 25px;
+}
+
 a.glazed-megamenu__heading {
 	text-transform:uppercase;
 	color:#000!important;
@@ -355,7 +347,7 @@ Header Settings
 
 */
 .glazed-secondary-header {
-	padding-top: 1px;
+	padding-bottom: 0;
 }
 /*
 .body--glazed-nav-desktop .glazed-header--top.glazed-header--overlay {
@@ -367,10 +359,12 @@ Header Settings
 }
 */
 
+
 h1.page-title {
 	font-family:Dosis;
 	text-transform:uppercase;
-	padding-bottom:15px!important;
+	padding-bottom:10px !important;
+        padding-top: 10px !important;
 }
 
 .page-title-full-width-container {
