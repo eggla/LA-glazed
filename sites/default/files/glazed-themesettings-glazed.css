@@ -94,11 +94,11 @@ body { background-size: auto; }
 }
 
 .body--glazed-nav-desktop #navbar.glazed-header--top {
-  background-color: #7ecefd;
+  background-color: rgba(126,206,253,1);
   opacity: 1;
 }
 .body--glazed-nav-desktop #navbar.glazed-header--top.affix {
-  background-color: #7ecefd;
+  background-color: rgba(126,206,253,0.9);
   opacity: 1;
 }
 
@@ -126,13 +126,7 @@ body { background-size: auto; }
 .body--glazed-nav-desktop .glazed-header--top.affix .nav-child-fixed-width {
   top: 60;
 }
-.body--glazed-nav-desktop.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 90px !important }
-
-html.js .body--glazed-nav-desktop.admin-menu.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 118px !important }
-
-  html.js .body--glazed-nav-desktop.toolbar.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 120px !important }
-
-  html.js .body--glazed-nav-desktop.toolbar-drawer.body--glazed-header-fixed.body--glazed-header-not-overlay { padding-top: 154px !important }
+.body--glazed-nav-desktop.body--glazed-header-overlay .page-title-full-width-container  { padding-top: 120px }
 
 .body--glazed-nav-mobile .glazed-header .navbar-header .wrap-branding,
 .body--glazed-nav-mobile .glazed-header .navbar-toggle {
@@ -348,6 +342,7 @@ Header Settings
 */
 .glazed-secondary-header {
 	padding-bottom: 0;
+        padding-top: 0 !important;
 }
 /*
 .body--glazed-nav-desktop .glazed-header--top.glazed-header--overlay {
