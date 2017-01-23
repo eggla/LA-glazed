@@ -187,6 +187,11 @@ Bug Fix for theme settings in theme administration
 Global Declared Classes
 
 */
+html {
+    height: 100vh; /* set viewport constraint */
+    min-height: 100%; /* enforce height */
+}
+
 .salmon,.salmon h1 {
 	color:#ff7166;
 }
@@ -240,6 +245,10 @@ Global Declared Classes
 .absolute {
 	position:absolute;
 	z-index:5;
+}
+
+.white-space-reset {
+        white-space: normal;
 }
 
 .controls:hover .absolute {
@@ -672,6 +681,12 @@ Front Page Settings
 
 .rotator.dynamic h2 {
 	color:#7ecefd;
+}
+
+@media screen and (max-width: 480px) {
+	.full-viewport {
+		background-image: url("Backgrounds/front-small.jpg") !important;
+	}
 }
 
 /*
