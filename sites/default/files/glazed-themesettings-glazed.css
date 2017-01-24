@@ -778,10 +778,9 @@ Sticky Bottom Nav Settings
 
 .fixed-bottom-nav .container-fluid {
 	position:fixed;
-	bottom:0;
-	right:0;
+	top: 45vh;
 	left:0;
-	width:10vw;
+	width: 10vw;
 	margin:0 auto;
 	z-index:500;
 	opacity:.2;
