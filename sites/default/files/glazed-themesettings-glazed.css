@@ -686,6 +686,8 @@ Front Page Settings
 @media screen and (max-width: 480px) {
 	.full-viewport {
 		background-image: url("Backgrounds/front-small.jpg") !important;
+                background-attachment: scroll !important;
+                background-position: 0% 0% !important;
 	}
 }
 
