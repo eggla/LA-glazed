@@ -31,7 +31,6 @@
 			var activityType = $(".leaflet-popup-content .views-field-activity-type");
 			var goButton = $(".leaflet-popup-content a");
 			$(activityType).each( function() {
-				alert(activityType);
 /*
 
 				if ($(this).text().length == 0) {
