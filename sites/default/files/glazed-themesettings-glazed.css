@@ -556,6 +556,10 @@ path.leaflet-interactive {
 	font-size:14px;
 }
 
+.view-display-id-block_1 table td.active {
+	background-color: #7ecefd;
+}
+
 .view-display-id-block_1 table td:hover {
 	background-color:#7ecefd;
 	cursor:pointer;

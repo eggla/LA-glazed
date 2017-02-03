@@ -11,12 +11,17 @@
 		  		  }
 		  		   
 		  		}, {
-		  		  offset: '0'
+		  		  offset: '70'
 		  		})
 		  		$('[class*=sync-id]').click(function (){
 				    activated = true;
 				});
 		  	}
+		  	
+		  	$('[class*=sync-id]').click(function (){
+		  		$('[class*=sync-id]').removeClass("active");
+		  		$(this).addClass("active");
+			});
 	});
   
 //FIXME need to adjust css for button text font size
