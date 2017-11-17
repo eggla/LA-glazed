@@ -1,3 +1,13 @@
+#page-title { text-align:  left } 
+
+#page-title .page-title { height:  60px } 
+
+.page-title-full-width-container:after { opacity:  1 } 
+
+.page-title-full-width-container:after { background-position: center center; }
+
+.page-title-full-width-container:after { background-size: auto; }
+
 body, p, .lead { line-height:  1.5 } 
 body { font-size:  20px } 
 .glazed-header--top #glazed-main-menu .nav > li > a, .glazed-header--side #glazed-main-menu .nav a  { font-size:  13px } 
@@ -19,15 +29,36 @@ hr {  background-color:  #cccccc; }
   blockquote, .blockquote p { font-size:  14px; } 
 } 
 
-#page-title { text-align:  left } 
 
-#page-title .page-title { height:  60px } 
+body, .toooltip {
+  font-family: "Titillium Web", "Titillium Web";
+  font-weight: 400;
+  font-style: normal;
+}
 
-.page-title-full-width-container:after { opacity:  1 } 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Dosis Medium", "Dosis";
+  font-weight: 500;
+  font-style: normal;
+}
 
-.page-title-full-width-container:after { background-position: center center; }
+nav,nav ul li,nav a {
+  font-family: "Titillium Web", "Titillium Web";
+  font-weight: 400;
+  font-style: normal;
+}
 
-.page-title-full-width-container:after { background-size: auto; }
+.site-name,.navbar-brand,label,.field-label,.page-title,th,.lead,.tp-caption,.az-counter {
+  font-family: "Dosis Extralight", "Dosis";
+  font-weight: 200;
+  font-style: normal;
+}
+
+blockquote, blockquote p {
+  font-family: "Dosis", "Dosis";
+  font-weight: 400;
+  font-style: normal;
+}
 
 .container {
   max-width: 1170px;
@@ -142,37 +173,6 @@ body { background-size: auto; }
 
 #navbar.glazed-header--top .dropdown-menu a:hover,#navbar.glazed-header--top .dropdown-menu a:focus { background-color: #3e454d }
 
-
-body, .toooltip {
-  font-family: "Titillium Web", "Titillium Web";
-  font-weight: 400;
-  font-style: normal;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Dosis Medium", "Dosis";
-  font-weight: 500;
-  font-style: normal;
-}
-
-nav,nav ul li,nav a {
-  font-family: "Titillium Web", "Titillium Web";
-  font-weight: 400;
-  font-style: normal;
-}
-
-.site-name,.navbar-brand,label,.field-label,.page-title,th,.lead,.tp-caption,.az-counter {
-  font-family: "Dosis Extralight", "Dosis";
-  font-weight: 200;
-  font-style: normal;
-}
-
-blockquote, blockquote p {
-  font-family: "Dosis", "Dosis";
-  font-weight: 400;
-  font-style: normal;
-}
-
 /*
 
 Bug Fix for theme settings in theme administration
@@ -249,6 +249,11 @@ html {
 
 .white-space-reset {
         white-space: normal;
+}
+
+.btn {
+       white-space: normal;
+       word-wrap: break-word; 
 }
 
 .controls:hover .absolute {
@@ -761,6 +766,10 @@ Timeline Settings
 */
 .stpe-timeline h4.subheading {
 	color:#ff7166!important;
+}
+
+ul.stpe-timeline, .page-node-130 section, .page-node-130 div {
+        overflow: visible;
 }
 
 /*
