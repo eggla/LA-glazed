@@ -1,0 +1,5 @@
+[09-Feb-2017 02:52:17 America/Anchorage] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 7455137 bytes) in /home/akpaddler/public_html/includes/database/database.inc on line 2227
+[09-Feb-2017 02:52:28 America/Anchorage] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 3937439 bytes) in /home/akpaddler/public_html/includes/database/database.inc on line 2227
+[09-Feb-2017 02:52:32 America/Anchorage] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 7455127 bytes) in /home/akpaddler/public_html/includes/database/database.inc on line 2227
+[09-Feb-2017 02:52:34 America/Anchorage] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 7455137 bytes) in /home/akpaddler/public_html/includes/database/database.inc on line 2227
+[09-Feb-2017 02:52:42 America/Anchorage] PHP Fatal error:  Allowed memory size of 67108864 bytes exhausted (tried to allocate 4104 bytes) in /home/akpaddler/public_html/includes/bootstrap.inc on line 1807
