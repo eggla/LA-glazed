@@ -62,7 +62,7 @@
       });
     });
     $(select).parent().find('.chosen-container').width('100%');
-    $('<div><a class="direct-input" href="#">' + Drupal.t("Switch to custom text input") + '</a></div>').insertBefore(select).click(
+    $('<div><a class="direct-input" href="#">' + Drupal.t("Edit as text") + '</a></div>').insertBefore(select).click(
       function() {
         $(input).css('display', 'block');
         $(select).parent().find('.chosen-container').remove();
@@ -112,7 +112,7 @@
       $(input).val(selected.join(delimiter));
     });
     $(select).parent().find('.chosen-container').width('100%');
-    $('<div><a class="direct-input" href="#">' + Drupal.t("Switch to custom text input") + '</a></div>').insertBefore(select).click(
+    $('<div><a class="direct-input" href="#">' + Drupal.t("Edit as text") + '</a></div>').insertBefore(select).click(
       function() {
         $(input).css('display', 'block');
         $(select).parent().find('.chosen-container').remove();
@@ -157,7 +157,7 @@
         path: 'vendor/jquery.iris/dist/iris.min.js?v1',
         callback: function() {
           glazed_add_js({
-            path: 'js/glazed.iris.min.js',
+            path: 'js/glazed.iris.js',
             callback: function() {
               glazed_add_css('css/color-picker.min.css', function() {
                 $(input).wpColorPicker();
@@ -198,7 +198,7 @@
             step: parseFloat(step),
             min: parseFloat(min),
             max: parseFloat(max),
-            tooltip: 'show',
+            tooltip: 'hide',
             value: (value == '' || isNaN(parseFloat(value)) || value == 'NaN') ? min : parseFloat(value),
             formatter: function (value) {
               return value + ' px';
@@ -209,7 +209,7 @@
             step: parseFloat(step),
             min: parseFloat(min),
             max: parseFloat(max),
-            tooltip: 'show',
+            tooltip: 'hide',
             value: (value == '' || isNaN(parseFloat(value)) || value == 'NaN') ? min : parseFloat(value),
           });
         }
@@ -267,13 +267,19 @@
       return (v == '') ? NaN : parseFloat(v).toString();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' +
         this.description + '</p></div>');
     },
     opened: function() {
-      initBootstrapSlider($(this.dom_element).find('input[name="' + this.param_name + '"]'), this.min, this.max, this.get_value(), this.step,this.formatter);
+      initBootstrapSlider(
+        $(this.dom_element).find('input[name="' + this.param_name + '"]'),
+        this.min,
+        this.max,
+        this.get_value(),
+        this.step,
+        this.formatter);
     },
   },
 
@@ -303,7 +309,7 @@
               '" type="checkbox" value="' + name + '"></div>';
           }
         }
-        this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div class="wrap-checkbox">' + inputs +
+        this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div class="wrap-checkbox">' + inputs +
           '</div><p class="help-block">' + this.description + '</p>');
         initBootstrapSwitch(this.dom_element);
       } else {
@@ -317,7 +323,7 @@
               '" type="checkbox" value="' + name + '">' + this.value[name] + '</label></div>';
           }
         }
-        this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div class="wrap-checkbox">' + inputs +
+        this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div class="wrap-checkbox">' + inputs +
           '</div><p class="help-block">' + this.description + '</p>');
       }
     }
@@ -354,7 +360,7 @@
           }
         }
       }
-      this.dom_element = $('<div class="form-group">' + inputs +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '">' + inputs +
         '<p class="help-block">' + this.description + '</p>');
       initBootstrapSwitch(this.dom_element);
     }
@@ -367,7 +373,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input id="' + this.id + '" name="' + this.param_name + '" type="text" value="' + value +
         '"></div><p class="help-block">' + this.description + '</p></div>');
     },
@@ -407,7 +413,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div id="' +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div id="' +
         this.id + '"><textarea class="form-control" rows="10" cols="45" name="' + this.param_name +
         '" ">' + value + '</textarea></div><p class="help-block">' + this.description + '</p></div>'
       );
@@ -426,7 +432,7 @@
       return $(this.dom_element).find('input[name="' + this.param_name + '"]').val();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' + this.description +
         '</p></div>');
@@ -512,7 +518,7 @@
         }
         content += '/<select>';
       }
-      this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div>' + content +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div>' + content +
         '</div><p class="help-block">' + this.description + '</p></div>');
     }
   },
@@ -539,7 +545,7 @@
       var subset_input = '<div class="col-sm-4"><label>' + Drupal.t('Subset') + '</label><input class="form-control" name="' + this.param_name + '_subset" type="text" value="' + subset + '"></div>';
       var variant_input = '<div class="col-sm-4"><label>' + Drupal.t('Variant') + '</label><input class="' +
         'form-control" name="' + this.param_name + '_variant" type="text" value="' + variant + '"></div>';
-      this.dom_element = $('<div class="form-group"><div class="row">' + font_input +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><div class="row">' + font_input +
         subset_input + variant_input + '</div><p class="help-block">' + this.description +
         '</p></div>');
     },
@@ -607,7 +613,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div id="' +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div id="' +
         this.id + '"><textarea class="form-control" rows="10" cols="45" name="' + this.param_name +
         '" ">' + value + '</textarea></div><p class="help-block">' + this.description + '</p></div>'
       );
@@ -764,7 +770,7 @@
       return $(this.dom_element).find('input[name="' + this.param_name + '"]').val();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' + this.description +
         '</p></div>');
@@ -822,7 +828,7 @@
       return $(this.dom_element).find('input[name="' + this.param_name + '"]').val();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' + this.description +
         '</p></div>');
@@ -838,7 +844,7 @@
       return $(this.dom_element).find('input[name="' + this.param_name + '"]').val();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' + this.description +
         '</p></div>');
@@ -860,7 +866,7 @@
       return (v == '') ? NaN : parseFloat(v).toString();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><div class="slider"></div><p class="help-block">' +
         this.description + '</p></div>');
@@ -902,7 +908,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading + '</label><div id="' +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading + '</label><div id="' +
         this.id + '"><textarea class="form-control" rows="10" cols="45" name="' + this.param_name +
         '" ">' + value + '</textarea></div><p class="help-block">' + this.description + '</p></div>'
       );
@@ -915,7 +921,7 @@
       return $(this.dom_element).find('input[name="' + this.param_name + '"]').val();
     },
     render: function(value) {
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '"></div><p class="help-block">' + this.description +
         '</p></div>');
@@ -929,7 +935,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><textarea id="' + this.id + '" class="form-control" rows="10" cols="45" name="' + this.param_name + '" ">' + value +
         '</textarea></div><p class="help-block">' + this.description + '</p></div>');
     },
@@ -943,7 +949,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><textarea id="' + this.id + '" class="form-control" rows="10" cols="45" name="' + this.param_name + '" ">' + value +
         '</textarea></div><p class="help-block">' + this.description + '</p></div>');
     },
@@ -1091,10 +1097,10 @@
     },
     render: function(value) {
       value = value.replace(/!important/g, '');
-      var output = '<div class="style row">';
+      var output = '<div class="style">';
       var match = null;
       var v = '';
-      output += '<div class="layout col-sm-6">';
+      output += '<div class="layout pane-1">';
       output += '<div class="margin"><label>' + Drupal.t('Margin') + '</label>';
       match = value.match(/margin-top[: ]*([\-\d\.]*)(px|%|em) *;/);
       if (match == null)
@@ -1173,10 +1179,10 @@
       output += '<div class="content">';
       output += '</div></div></div></div>';
       output += '</div>';
-      output += '<div class="settings col-sm-6">';
+      output += '<div class="settings pane-2">';
       output += '<div class="font form-group"><label>' + Drupal.t('Font color') + '</label>';
       this.color_id = _.uniqueId();
-      match = value.match(/(^| |;)color[: ]*([#\dabcdef]*) *;/);
+      match = value.match(/(^| |;)color[: ]*\s?([^;]{4,}) *;/);
       if (match == null)
         v = '';
       else
@@ -1184,7 +1190,7 @@
       output += '<div><input id="' + this.color_id + '" name="color" type="text" value="' + v + '"></div></div>';
       output += '<div class="border form-group"><label>' + Drupal.t('Border color') + '</label>';
       this.border_color_id = _.uniqueId();
-      match = value.match(/border-color[: ]*([#\dabcdef]*) *;/);
+      match = value.match(/border-color[: ]*\s?([^;]{4,}) *;/);
       if (match == null)
         v = '';
       else
@@ -1193,7 +1199,7 @@
         '"></div></div>';
       output += '<div class="background form-group"><label>' + Drupal.t('Background') + '</label>';
       this.bg_color_id = _.uniqueId();
-      match = value.match(/background-color[: ]*([#\dabcdef]*) *;/);
+      match = value.match(/background-color[: ]*\s?([^;]{4,}) *;/);
       if (match == null)
         v = '';
       else
@@ -1263,6 +1269,7 @@
         'right center': Drupal.t("Right Center"),
         'right bottom': Drupal.t("Right Bottom"),
         'center bottom': Drupal.t("Center Bottom"),
+        'center top': Drupal.t("Center Top"),
       };
       for (var key in background_position) {
         if (key == v)
@@ -1342,7 +1349,7 @@
     },
     render: function(value) {
       this.id = _.uniqueId();
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><textarea id="' + this.id + '" rows="10" cols="45" name="' + this.param_name + '" ">' +
         value + '</textarea></div><p class="help-block">' + this.description + '</p></div>');
     },
@@ -1362,7 +1369,7 @@
           CKEDITOR.config.autoParagraph = false;
 
           // Theme integration
-          CKEDITOR.config.contentsCss = ['//cdn.jsdelivr.net/bootstrap/3.3.5/css/bootstrap.min.css'];
+          CKEDITOR.config.contentsCss = ['//cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css'];
           if (typeof window.Drupal.settings.glazed.glazedPath.length != "undefined") {
             CKEDITOR.config.contentsCss.push(Drupal.settings.basePath + window.Drupal.settings.glazed.glazedPath +
               'css/glazed.css');
@@ -1408,7 +1415,7 @@
 
           // Only once apply this settings
           var palletsString = palette.join(',') + ',';
-          if (CKEDITOR.config.colorButton_colors.indexOf(palletsString) < 0) {
+          if ((CKEDITOR.config.hasOwnProperty('colorButton_colors')) && (CKEDITOR.config.colorButton_colors.indexOf(palletsString)) < 0) {
             CKEDITOR.config.colorButton_colors = palletsString + CKEDITOR.config.colorButton_colors;
           }
 
@@ -1482,7 +1489,7 @@
     },
     render: function(value) {
       var required = this.required ? 'required' : '';
-      this.dom_element = $('<div class="form-group"><label>' + this.heading +
+      this.dom_element = $('<div class="form-group form-group--' + this.param_name + '"><label>' + this.heading +
         '</label><div><input class="form-control" name="' + this.param_name +
         '" type="text" value="' + value + '" ' + required + '></div><p class="help-block">' + this.description +
         '</p></div>');

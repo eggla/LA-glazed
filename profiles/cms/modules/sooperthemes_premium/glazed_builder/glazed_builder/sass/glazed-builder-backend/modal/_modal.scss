@@ -31,12 +31,12 @@ div.modal-dialog {
     opacity: 0.1;
   }
   .btn-default {
-    background: #f0f0f0;
+    background: #f6f6fb;
     color: #555;
     &:hover,
     &:focus,
     &:active {
-      background: #f0f0f0;
+      background: #f6f6fb;
       color: #555;
     }
   }
@@ -75,6 +75,7 @@ div.modal-dialog {
     color: #fff;
     font-size: 14px;
     padding: 13px 20px;
+    position: relative;
     .modal-title {
       font-size: 16px;
       color: #fff;
@@ -84,12 +85,16 @@ div.modal-dialog {
       opacity: 0.3;
     }
     img {
-      width: 25px;
+      width: 56px;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   }
   .modal-content {
     border-radius: 0;
     border: none;
+    box-shadow: $glazed-shadow-4;
   }
   .tab-content {
     padding-top: 15px;

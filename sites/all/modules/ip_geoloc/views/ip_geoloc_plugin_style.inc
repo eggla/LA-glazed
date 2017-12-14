@@ -642,7 +642,9 @@ function ip_geoloc_plugin_style_extract_locations($views_plugin_style, $enable_b
 
   foreach ($latitudes as $latitude) {
     if (isset($view->field[$latitude])) {
-      $loc_field_names[] = $view->field[$latitude]->definition['field_name'];
+    //$loc_field_names[] = $view->field[$latitude]->definition['field_name'];
+      // Search API [#2603450]
+      $loc_field_names[] = $view->field[$latitude]->field;
       $loc_field_aliases[] = $view->field[$latitude]->field_alias;
       // Example: $loc_field_name == 'field_geo'; $loc_field_alias == 'nid';
     }
@@ -686,25 +688,40 @@ function ip_geoloc_plugin_style_extract_locations($views_plugin_style, $enable_b
 
         $base = _ip_geoloc_plugin_style_get_base1($row, $loc_field_name, $loc_field_alias);
         $location = new stdClass();
-
-        if (_ip_geoloc_plugin_style_extract_lat_lng($location, $row, $latitude, $longitude, $base)) {
-          // Remaining row values go into the balloon.
-          if ($enable_balloons && !empty($views_plugin_style->rendered_fields[$i])) {
-            $location->balloon_text = $views_plugin_style->rendered_fields[$i][$group_field];
-            foreach ($set['rows'] as $i => $row) {
-              $rendered_fields = $views_plugin_style->rendered_fields[$i];
-              unset($rendered_fields[$group_field]);
-              $location->balloon_text .= $separator . implode($separator, $rendered_fields);
-            }
+        $is_location = FALSE;
+        $multiple_locations = array();
+        if (_ip_geoloc_plugin_style_extract_lat_lng($location, $row, $latitude, $longitude, $base, $multiple_locations)) {
+          $is_location = TRUE;
+        }
+        // Search API support [#2603450]
+        else if (isset($row->_entity_properties)) {
+          $longitude_alias = $view->field[$longitude]->field_alias;
+          if (isset($row->_entity_properties[$loc_field_alias])) {
+            $location->latitude = $row->_entity_properties[$loc_field_alias];
           }
-          if (!empty($diff_color_ass[$display_id][$differentiator])) {
-            _ip_geoloc_plugin_style_set_marker_color($location, $row, $differentiator, $is_tax_term, $view->args, $diff_color_ass[$display_id][$differentiator]);
+          if (isset($row->_entity_properties[$longitude_alias])) {
+            $location->longitude = $row->_entity_properties[$longitude_alias];
           }
-          _ip_geoloc_plugin_style_decorate($location, $row, $tooltip_field, $tag_field);
-
-          if (isset($aggregation_field)) {
-            $value = ip_geoloc_get_view_result($views_plugin_style, $aggregation_field, $i);
-            $location->aggregation_value = empty($is_count) ? reset($value) : count($value);
+          if (isset($location->latitude) && isset($location->longitude)) {
+            $is_location = TRUE;
+          }
+        }
+        if ($is_location) {
+			if (count($multiple_locations)) {
+              foreach ($multiple_locations as $location) {
+                // Remaining row values go into the balloon.
+                if ($enable_balloons && !empty($views_plugin_style->rendered_fields[$i])) {
+                  $location->balloon_text = implode($separator, $views_plugin_style->rendered_fields[$i]);
+                }
+                if (!empty($diff_color_ass[$display_id][$differentiator])) {
+                  _ip_geoloc_plugin_style_set_marker_color($location, $row, $differentiator, $is_tax_term, $view->args, $diff_color_ass[$display_id][$differentiator]);
+                }
+                _ip_geoloc_plugin_style_decorate($location, $row, $tooltip_field, $tag_field);
+                if (isset($aggregation_field)) {
+                  $value = ip_geoloc_get_view_result($views_plugin_style, $aggregation_field, $i);
+                  $location->aggregation_value = empty($is_count) ? reset($value) : count($value);
+                }
+              }
           }
           $locations[$j ? "$i.$j" : $i] = $location;
           $j++;
@@ -730,8 +747,25 @@ function ip_geoloc_plugin_style_extract_locations($views_plugin_style, $enable_b
 
           $base = _ip_geoloc_plugin_style_get_base1($row, $loc_field_name, $loc_field_alias);
           $location = new stdClass();
+          $is_location = FALSE;
 
           if (_ip_geoloc_plugin_style_extract_lat_lng($location, $row, $latitude, $longitude, $base)) {
+            $is_location = TRUE;
+          }
+          // Search API support [#2603450]
+          else if (isset($row->_entity_properties)) {
+            $longitude_alias = $view->field[$longitude]->field_alias;
+            if (isset($row->_entity_properties[$loc_field_alias])) {
+              $location->latitude  = $row->_entity_properties[$loc_field_alias];
+            }
+            if (isset($row->_entity_properties[$longitude_alias])) {
+              $location->longitude  = $row->_entity_properties[$longitude_alias];
+            }
+            if (isset($location->latitude) && isset($location->longitude)) {
+              $is_location = TRUE;
+            }
+          }
+          if ($is_location) {
             // Remaining row values go into the balloon.
             if ($enable_balloons && !empty($views_plugin_style->rendered_fields[$i])) {
               $location->balloon_text = implode($separator, $views_plugin_style->rendered_fields[$i]);
@@ -864,7 +898,7 @@ function _ip_geoloc_plugin_style_get_base2($row, $field_name, $delta) {
  * @return object|NULL
  *   location -- @todo return array for consistency with Leaflet?
  */
-function _ip_geoloc_plugin_style_extract_lat_lng(&$location, $row, $latitude, $longitude, $loc_field_value = NULL) {
+function _ip_geoloc_plugin_style_extract_lat_lng(&$location, $row, $latitude, $longitude, $loc_field_value = NULL, &$multiple_locations = array()) {
 
   $delta = &drupal_static(__FUNCTION__);
   if (isset($delta)) {
@@ -916,17 +950,21 @@ function _ip_geoloc_plugin_style_extract_lat_lng(&$location, $row, $latitude, $l
         // Support WKT lines and polygons in Leaflet. Call requires:
         // $base['geo_type'] eg 'point' or 'linestring'
         // $base['geom'] eg. 'POINT(145 -37)' or 'LINESTRING(145 -37, 146, -38)'
-        $loc = leaflet_process_geofield(array($base));
-        $location = (object) reset($loc);
+		$locs = leaflet_process_geofield(array($base));
+        foreach ($locs as $loc) {
+		$location = (object) $loc;
 
-        // @todo get rid of this duality, use lat/lon throughout
-        if (isset($location->lat)) {
-          $location->latitude = $location->lat;
-          unset($location->lat);
-        }
-        if (isset($location->lon)) {
-          $location->longitude = $location->lon;
-          unset($location->lon);
+          // @todo get rid of this duality, use lat/lon throughout
+          if (isset($location->lat)) {
+            $location->latitude = $location->lat;
+            unset($location->lat);
+          }
+          if (isset($location->lon)) {
+            $location->longitude = $location->lon;
+            unset($location->lon);
+          }
+          $multiple_locations[] = $location;
+		
         }
       }
       else {
@@ -1156,7 +1194,11 @@ function _ip_geoloc_plugin_style_decorate(&$location, $row, $tooltip_field, $tag
     $tag = $tag_field->theme($row);
     $location->marker_tag = _ip_geoloc_plugin_style_add_label_and_styling($tag_field, $tag);
   }
-  if (isset($row->nid)) {
+  if (isset($row->id)) {
+    // CiviCRM [#2549825]
+    $location->id = $row->id;
+  }
+  elseif (isset($row->nid)) {
     $location->id = $row->nid;
   }
   elseif (isset($row->tid)) {
@@ -1167,6 +1209,9 @@ function _ip_geoloc_plugin_style_decorate(&$location, $row, $tooltip_field, $tag
   }
   elseif (isset($row->entity) && is_numeric($row->entity)) {
     $location->id = $row->entity;
+  }
+  elseif (isset($row->entity->nid) && is_numeric($row->entity->nid)) {
+    $location->id = $row->entity->nid;
   }
 }
 

@@ -2,7 +2,7 @@
 
 SooperThemes Drupal Drag and Drop builder module. Built as companion for our Glazed Theme product but also works as standalone module to add drag and drop content on any entity textfield. For a quick live demo of the product visit http://www.trysooperthemes.com/
 
-For testing and development it is preferred that your installation is based on the Main Demo installation profile. You can download it here: https://www.sooperthemes.com/download
+For testing and development it is preferred that your installation is based on the Main Demo installation profile. For the best experience you should use a Bootstrap 3 based theme in your environment. You can download it here: https://www.sooperthemes.com/download
 
 ## Workflow
 

@@ -1,14 +1,12 @@
 
-
 .stpe-pricelisting {
     h1,h2,h3,h4,h5,h6,p {
       margin: 0;
     }
-    // border: 2px dashed black;
     .stpe-pricelisting__heading {
     position: relative;
     border-bottom: dotted 2px #ccc;
-  }
+   }
   .stpe-pricelisting__title {
     position: relative;
     bottom: -0.3em;
@@ -22,6 +20,7 @@
     bottom: -0.3em;
     right: 0;
     padding: 0 0 0 5px;
+    background: #fff;
   }
   .stpe-pricelisting__description {
     padding: 5px 0 0 0;

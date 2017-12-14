@@ -224,10 +224,7 @@ glazedElements.prototype.try_render_unknown_elements=function () {
       }
     }
 function BaseElement(parent, position) {
-    if (glazed_frontend)
-      this.id = _.uniqueId('f');
-    else
-      this.id = _.uniqueId('b');
+    this.id = Math.random().toString(36).substr(2, 5);
     if (parent != null) {
       this.parent = parent;
       if (typeof position === 'boolean') {
@@ -275,6 +272,16 @@ BaseElement.prototype.get_hover_style=function () {
           ' { ' + this.attrs['hover_style'] + '} --></style>';
       else
         return '';
+    }
+BaseElement.prototype.get_el_classes=function () {
+      var classes = this.attrs['el_class'];
+      if (this.attrs['shadow'] > 0) {
+        classes = classes + ' ' + 'glazed-shadow-' + this.attrs['shadow'];
+      }
+      if (this.attrs['hover_shadow'] > 0) {
+        classes = classes + ' ' + 'glazed-shadow-hover-' + this.attrs['hover_shadow'];
+      }
+      return classes;
     }
 BaseElement.prototype.showed=function ($) {
       if ('pos_left' in this.attrs && this.attrs['pos_left'] != '')
@@ -892,7 +899,7 @@ SectionElement.prototype.showed=function ($) {
                 $(element.dom_element).css('background-position', v + ' 0');
                 $(element.dom_element).parallax(v, element.attrs['parallax_speed'] / 100);
               }, {
-                offset: '100%',
+                offset: '300%',
                 handler: function(direction) {
                   this.destroy()
                 },
@@ -927,14 +934,15 @@ SectionElement.prototype.showed=function ($) {
             callback: function() {
               $(element.dom_element).waypoint(function(direction) {
                 $(element.dom_element).attr('data-property', "{videoURL:'" + youtube_parser(element.attrs[
-                    'video_youtube']) + "',containment:'#" + element.id +
+                    'video_youtube']) + "',containment:'[data-az-id=" + element.id + "]" +
                   "', showControls:false, autoPlay:true, loop:" + loop.toString() + ", mute:" +
                   mute.toString() + ", startAt:" + element.attrs['video_start'] + ", stopAt:" +
-                  element.attrs['video_stop'] + ", opacity:1, addRaster:false, quality:'default'}");
+                  element.attrs['video_stop'] + ", opacity:1, addRaster:false}");
+                console.log('go!');
                 $(element.dom_element).mb_YTPlayer();
                 $(element.dom_element).playYTP();
               }, {
-                offset: '100%',
+                offset: '300%',
                 handler: function(direction) {
                   this.destroy()
                 },
@@ -1012,6 +1020,12 @@ ContainerElement.prototype.showed=function ($) {
     }
 ContainerElement.prototype.load_container=function () {
       var element = this;
+      // Avoid repetitive loading.
+      window.loadedContainers = window.loadedContainers || {}
+      if (window.loadedContainers[element.id]) {
+        return;
+      }
+      window.loadedContainers[element.id] = true;
       if (this.attrs['container'] != '') {
         glazed_load_container(this.attrs['container'].split('/')[0], this.attrs['container'].split('/')[1],
           function(shortcode) {
@@ -1034,6 +1048,7 @@ ContainerElement.prototype.load_container=function () {
                 element.show_controls();
                 element.update_sortable();
               }
+              element.parent.attach_children();
               element.attach_children();
               for (var i = 0; i < element.children.length; i++) {
                 element.children[i].recursive_showed();
@@ -1149,7 +1164,7 @@ TabsElement.prototype.showed=function ($) {
       $(this.dom_element).find('ul.nav-tabs li:first a')[fp + 'tab']('show');
     }
 TabsElement.prototype.render=function ($) {
-      this.dom_element = $('<div class="az-element az-tabs tabbable ' + this.attrs['el_class'] + this.attrs['az_dirrection'] + '" style="' + this.attrs[
+      this.dom_element = $('<div class="az-element az-tabs tabbable ' + this.get_el_classes() + this.attrs['az_dirrection'] + '" style="' + this.attrs[
         'style'] + '"></div>');
       var menu = '<ul class="nav nav-tabs" role="tablist">';
       for (var i = 0; i < this.children.length; i++) {
@@ -1169,7 +1184,7 @@ register_element('az_tab', true, TabElement);
 TabElement.prototype.params=[{"param_name":"title","value":"Title","safe":true},{"param_name":"el_class","value":"","safe":true},{"param_name":"style","value":"","safe":true},{"param_name":"hover_style","value":"","safe":true},{"param_name":"pos_left","value":"","safe":true},{"param_name":"pos_right","value":"","safe":true},{"param_name":"pos_top","value":"","safe":true},{"param_name":"pos_bottom","value":"","safe":true},{"param_name":"pos_width","value":"","safe":true},{"param_name":"pos_height","value":"","safe":true},{"param_name":"pos_zindex","value":"","safe":true}];
 TabElement.prototype.render=function ($) {
       this.dom_element = $('<div id="' + this.id + '" class="az-element az-ctnr az-tab tab-pane ' +
-        this.attrs['el_class'] + '" style="' + this.attrs['style'] + '"></div>');
+        this.get_el_classes() + '" style="' + this.attrs['style'] + '"></div>');
       this.dom_content_element = this.dom_element;
       TabElement.baseclass.prototype.render.apply(this, arguments);
     }
@@ -1195,7 +1210,7 @@ AccordionElement.prototype.showed=function ($) {
     }
 AccordionElement.prototype.render=function ($) {
       this.dom_element = $('<div id="' + this.id + '" class="az-element az-accordion panel-group ' +
-        this.attrs['el_class'] + '" style="' + this.attrs['style'] + '"></div>');
+        this.get_el_classes() + '" style="' + this.attrs['style'] + '"></div>');
       this.dom_content_element = this.dom_element;
       AccordionElement.baseclass.prototype.render.apply(this, arguments);
     }
@@ -1268,7 +1283,7 @@ CarouselElement.prototype.showed=function ($) {
         path: 'vendor/owl.carousel/owl-carousel/owl.carousel.js',
         loaded: 'owlCarousel' in $.fn,
         callback: function() {
-          //$(element.controls).detach();
+          //element.controls.detach();
           var owl_carousel_refresh = function(owl) {
             var userItems = null;
             if ('userItems' in owl)
@@ -1321,7 +1336,7 @@ CarouselElement.prototype.showed=function ($) {
               owlClasses += ' st-owl-navigation-' + element.attrs['navigation_position'];
           }
           var autoPlay = false;
-          if (!Boolean(element.attrs['autoPlay']) && (element.attrs['interval'] > 0)) {
+          if (!Boolean(element.attrs['autoplay']) && (element.attrs['interval'] > 0)) {
             autoPlay = element.attrs['interval'];
           }
           $(element.dom_content_element).owlCarousel({
@@ -1356,7 +1371,7 @@ CarouselElement.prototype.showed=function ($) {
       });
     }
 CarouselElement.prototype.render=function ($) {
-      this.dom_element = $('<div id="' + this.id + '" class="az-element az-carousel ' + this.attrs['el_class'] +
+      this.dom_element = $('<div id="' + this.id + '" class="az-element az-carousel ' + this.get_el_classes() +
         '" style="' + this.attrs['style'] + '"></div>');
       this.dom_content_element = $('<div></div>').appendTo(this.dom_element);
       CarouselElement.baseclass.prototype.render.apply(this, arguments);
@@ -1371,7 +1386,7 @@ SlideElement.prototype.render=function ($) {
       var type = 'panel-default';
       if (this.parent.attrs['type'] != '')
         type = this.parent.attrs['type'];
-      this.dom_element = $('<div class="az-element az-slide az-ctnr ' + this.attrs['el_class'] + ' clearfix" style="' + this.attrs['style'] + '"></div>');
+      this.dom_element = $('<div class="az-element az-slide az-ctnr ' + this.get_el_classes() + ' clearfix" style="' + this.attrs['style'] + '"></div>');
       this.dom_content_element = this.dom_element;
       SlideElement.baseclass.prototype.render.apply(this, arguments);
     }
@@ -1434,7 +1449,7 @@ render: function ($) {
       else {
         var circliful_icon = '';
       }
-      this.dom_element = $('<div class="az-element az-circle-counter ' + this.attrs['el_class'] + '" style="' +
+      this.dom_element = $('<div class="az-element az-circle-counter ' + this.get_el_classes() + '" style="' +
         this.attrs['style'] + '"><div id="' + this.id + '" data-dimension="' + this.attrs['dimension'] +
         '" data-text="' + this.attrs['text'] + '" data-info="' + this.attrs['info'] + '" data-width="' + this
           .attrs['width'] + '" data-fontsize="' + this.attrs['fontsize'] + '" data-type="' + this.attrs['type'] +
@@ -1649,6 +1664,22 @@ showed: function ($) {
               }
               break;
           }
+
+          $.extend(options, {
+            daysLabel: Drupal.t('Days'),
+            dayLabel: Drupal.t('Day'),
+            hoursLabel: Drupal.t('Hours'),
+            hourLabel: Drupal.t('Hour'),
+            minutesLabel: Drupal.t('Minutes'),
+            minuteLabel: Drupal.t('Minute'),
+            secondsLabel: Drupal.t('Seconds'),
+            secondLabel: Drupal.t('Second'),
+            decisecondsLabel: Drupal.t('Deciseconds'),
+            decisecondLabel: Drupal.t('Decisecon'),
+            millisecondsLabel: Drupal.t('Milliseconds'),
+            millisecondLabel: Drupal.t('Millisecond')
+          });
+
           switch (element.attrs['counter_scope']) {
             case 'date':
               var d = Date.parseDate(element.attrs['date'], 'd.m.Y');
@@ -1738,7 +1769,7 @@ showed: function ($) {
 params: [{"param_name":"countdown_style","value":""},{"param_name":"counter_scope","value":""},{"param_name":"date","value":""},{"param_name":"date_time","value":""},{"param_name":"time","value":""},{"param_name":"reset_hours","value":""},{"param_name":"reset_minutes","value":""},{"param_name":"reset_seconds","value":""},{"param_name":"referrer","value":""},{"param_name":"restart","value":""},{"param_name":"saved","value":""},{"param_name":"display","value":""},{"param_name":"an_start","value":""},{"param_name":"an_in","value":""},{"param_name":"an_out","value":""},{"param_name":"an_hidden","value":""},{"param_name":"an_infinite","value":""},{"param_name":"an_offset","value":"100"},{"param_name":"an_duration","value":"1000"},{"param_name":"an_in_delay","value":"0"},{"param_name":"an_out_delay","value":"0"},{"param_name":"an_parent","value":"1"},{"param_name":"an_name","value":""},{"param_name":"el_class","value":""},{"param_name":"style","value":""},{"param_name":"hover_style","value":""},{"param_name":"pos_left","value":""},{"param_name":"pos_right","value":""},{"param_name":"pos_top","value":""},{"param_name":"pos_bottom","value":""},{"param_name":"pos_width","value":""},{"param_name":"pos_height","value":""},{"param_name":"pos_zindex","value":""}],
 frontend_render: true,
 render: function ($) {
-      this.dom_element = $('<div class="az-element az-countdown ' + this.attrs['el_class'] + '" style="' + this
+      this.dom_element = $('<div class="az-element az-countdown ' + this.get_el_classes() + '" style="' + this
           .attrs['style'] + '"></div>');
       var countdown = $('<div class="ce-countdown"></div>').appendTo(this.dom_element);
       switch (this.attrs['countdown_style']) {
@@ -1903,7 +1934,7 @@ frontend_render: true,
 render: function ($) {
       var id = this.id;
       var element = this;
-      this.dom_element = $('<div class="az-element az-image ' + this.attrs['el_class'] + '"></div>');
+      this.dom_element = $('<div class="az-element az-image ' + this.get_el_classes() + '"></div>');
       function render_image(value, style, width, height, alt, title) {
         if ($.isNumeric(width))
           width = width + 'px';
