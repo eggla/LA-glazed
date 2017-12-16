@@ -79,7 +79,9 @@ blockquote, blockquote p {
   height: 60px;
   line-height: 60px;
 }
-#navbar.glazed-header--top .menu a:hover, #navbar.glazed-header--top .menu a:focus { background-color: accent1 }
+#navbar.glazed-header--top .menu a:hover, #navbar.glazed-header--top .menu a:focus { background-color: accent2 }
+
+#navbar.glazed-header--top .menu a:hover, #navbar.glazed-header--top .menu a:focus { color: white }
 
 #navbar.glazed-header--top .dropdown-menu { background-color: white }
 
@@ -270,6 +272,14 @@ Typography Overrides
 	font-family:"Dosis","Dosis Medium",helvetica;
 }
 
+.menu-price {
+	color: #ff7166;
+}
+
+li.leaf:hover .menu-price {
+	color: #fff6e5;
+}
+
 /*
 
 Navbar Settings
@@ -313,6 +323,16 @@ a.glazed-megamenu__heading {
 a.glazed-megamenu__heading:hover,a.glazed-megamenu__heading:focus {
 	cursor:default;
 	background-color:transparent!important;
+}
+
+
+#navbar.glazed-header--hover-background .menu .active-trail>a, #navbar.glazed-header--hover-background .menu a:hover, #navbar.glazed-header--hover-background .menu a:hover .menu a:focus, #navbar.glazed-header--hover-background .menu a.active {
+    color: #fff;
+    background-color: #3e454d;
+}
+
+.glazed-megamenu__heading.nolink  {
+    background-color: transparent !important;
 }
 
 /*
@@ -820,8 +840,7 @@ Hide Button Settings
 
 .hideButton {
     cursor: pointer;
-}
-.container {
+}.container {
   max-width: 1170px;
   padding-left: 60px;
   padding-right: 60px;
